@@ -2275,3 +2275,120 @@ img {
         flex-direction: column;
     }
 }
+
+/* ==========================================
+   PRIVACY POLICY PAGE STYLES
+   ========================================== */
+.privacy-page {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    background: var(--gradient-hero-bg);
+}
+
+.privacy-container {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.privacy-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.privacy-header h1 {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.privacy-last-updated {
+    font-family: var(--font-body);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.privacy-content-card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 50px;
+    box-shadow: var(--shadow-premium);
+}
+
+.privacy-section-block {
+    margin-bottom: 40px;
+}
+
+.privacy-section-block:last-child {
+    margin-bottom: 0;
+}
+
+.privacy-section-block h2 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.privacy-section-block h2 i {
+    width: 22px;
+    height: 22px;
+    color: var(--accent-blue);
+}
+
+.privacy-section-block p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 16px;
+    font-size: 0.98rem;
+}
+
+.privacy-section-block ul {
+    margin-bottom: 20px;
+    padding-left: 24px;
+}
+
+.privacy-section-block ul li {
+    list-style-type: disc;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.back-to-home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-blue);
+    font-weight: 600;
+    margin-bottom: 24px;
+    font-family: var(--font-heading);
+    transition: var(--transition-fast);
+}
+
+.back-to-home-link:hover {
+    color: var(--primary-color);
+    transform: translateX(-4px);
+}
+
+@media (max-width: 768px) {
+    .privacy-page {
+        padding-top: 100px;
+        padding-bottom: 50px;
+    }
+    
+    .privacy-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .privacy-content-card {
+        padding: 30px 20px;
+    }
+}
+

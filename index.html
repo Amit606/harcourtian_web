@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Harcourtian Connect - Reconnect, network, and grow together with the official networking platform for Harcourtians. Find alumni, discover jobs, promote your business, and stay connected for life.">
+    <title>Harcourtian Connect - Reconnect, Network, Grow Together</title>
+    
+    <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header" id="header">
+        <div class="header-container">
+            <a href="#" class="logo-container" id="nav-logo">
+                <div class="logo-crest">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Harcourtian</span>
+                    <span class="logo-sub">Connect</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#how-it-works" class="nav-link">Events</a></li>
+                    <li><a href="#showcase" class="nav-link">Alumni</a></li>
+                    <li><a href="#showcase" class="nav-link">Jobs</a></li>
+                    <li><a href="#showcase" class="nav-link">Businesses</a></li>
+                    <li><a href="#testimonials" class="nav-link">Blog</a></li>
+                    <li><a href="#faq" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#download" class="btn btn-primary btn-nav" id="btn-nav-download">
+                    <i data-lucide="download"></i>
+                    <span>Download App</span>
+                </a>
+                <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu" class="icon-menu"></i>
+                    <i data-lucide="x" class="icon-close hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="hero-bg-overlay"></div>
+            <div class="container hero-container">
+                <!-- Hero Left: Content -->
+                <div class="hero-content">
+                    <div class="badge-verified">
+                        <div class="badge-icon">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <span>Verified Alumni Network</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Reconnect.<br>
+                        Network.<br>
+                        <span class="text-gradient">Grow Together.</span>
+                    </h1>
+                    <p class="hero-description">
+                        The official networking platform for Harcourtians. Find alumni, discover jobs, attend reunions, promote your business, and stay connected for life.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="#download" class="btn btn-primary" id="btn-hero-download">
+                            <i data-lucide="download"></i>
+                            <span>Download App</span>
+                        </a>
+                        <a href="#register" class="btn btn-secondary" id="btn-hero-join">
+                            <i data-lucide="users-round"></i>
+                            <span>Join Community</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Center: Phone Mockup -->
+                <div class="hero-mockup-col">
+                    <div class="phone-mockup">
+                        <div class="phone-speaker"></div>
+                        <div class="phone-screen">
+                            <div class="phone-status-bar">
+                                <span class="time">9:41</span>
+                                <div class="status-icons">
+                                    <i data-lucide="signal" class="mini-icon"></i>
+                                    <i data-lucide="wifi" class="mini-icon"></i>
+                                    <i data-lucide="battery" class="mini-icon"></i>
+                                </div>
+                            </div>
+                            <div class="app-container">
+                                <div class="app-header">
+                                    <div class="app-brand">
+                                        <div class="app-logo"><i data-lucide="shield-check"></i></div>
+                                        <div>
+                                            <div class="app-name">Harcourtian</div>
+                                            <div class="app-subname">Connect</div>
+                                        </div>
+                                    </div>
+                                    <div class="app-welcome">Good Morning, Amit 👋</div>
+                                </div>
+                                
+                                <div class="app-main-buttons">
+                                    <div class="app-btn app-btn-blue">
+                                        <i data-lucide="users"></i>
+                                        <span>Alumni Directory</span>
+                                    </div>
+                                    <div class="app-btn app-btn-light">
+                                        <i data-lucide="map-pin"></i>
+                                        <span>Nearby Alumni</span>
+                                    </div>
+                                </div>
+
+                                <div class="app-grid-menu">
+                                    <div class="app-grid-item">
+                                        <div class="grid-icon bg-blue-light"><i data-lucide="briefcase"></i></div>
+                                        <span>Jobs</span>
+                                    </div>
+                                    <div class="app-grid-item">
+                                        <div class="grid-icon bg-orange-light"><i data-lucide="calendar"></i></div>
+                                        <span>Events</span>
+                                    </div>
+                                    <div class="app-grid-item">
+                                        <div class="grid-icon bg-green-light"><i data-lucide="store"></i></div>
+                                        <span>Businesses</span>
+                                    </div>
+                                    <div class="app-grid-item">
+                                        <div class="grid-icon bg-red-light"><i data-lucide="newspaper"></i></div>
+                                        <span>News Feed</span>
+                                    </div>
+                                </div>
+
+                                <div class="app-event-card">
+                                    <div class="card-header">
+                                        <span>Upcoming Event</span>
+                                        <a href="#">View All</a>
+                                    </div>
+                                    <div class="event-details">
+                                        <div class="event-thumb">
+                                            <i data-lucide="calendar-days"></i>
+                                        </div>
+                                        <div class="event-info">
+                                            <div class="event-title">MCA Connect 2026 Alumni Meet</div>
+                                            <div class="event-date"><i data-lucide="clock"></i> 22 Feb 2026 | New Delhi</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="app-bottom-nav">
+                                    <div class="nav-item active"><i data-lucide="home"></i><span>Home</span></div>
+                                    <div class="nav-item"><i data-lucide="search"></i><span>Directory</span></div>
+                                    <div class="nav-item"><i data-lucide="briefcase"></i><span>Jobs</span></div>
+                                    <div class="nav-item"><i data-lucide="calendar"></i><span>Events</span></div>
+                                    <div class="nav-item"><i data-lucide="user"></i><span>Profile</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right: Floating Stats Cards -->
+                <div class="hero-stats-col">
+                    <div class="floating-card slide-in-delay-1">
+                        <div class="float-icon-bg bg-blue">
+                            <i data-lucide="users"></i>
+                        </div>
+                        <div class="float-details">
+                            <div class="float-num">700+</div>
+                            <div class="float-label">Alumni</div>
+                        </div>
+                    </div>
+                    <div class="floating-card slide-in-delay-2">
+                        <div class="float-icon-bg bg-indigo">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <div class="float-details">
+                            <div class="float-num">Jobs</div>
+                            <div class="float-label">Opportunities</div>
+                        </div>
+                    </div>
+                    <div class="floating-card slide-in-delay-3">
+                        <div class="float-icon-bg bg-green">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div class="float-details">
+                            <div class="float-num">Nearby</div>
+                            <div class="float-label">Alumni</div>
+                        </div>
+                    </div>
+                    <div class="floating-card slide-in-delay-4">
+                        <div class="float-icon-bg bg-orange">
+                            <i data-lucide="calendar"></i>
+                        </div>
+                        <div class="float-details">
+                            <div class="float-num">Events</div>
+                            <div class="float-label">& Reunions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats strip -->
+        <section class="stats-strip">
+            <div class="container stats-container">
+                <div class="stat-item">
+                    <i data-lucide="users-2"></i>
+                    <div class="stat-content">
+                        <h3>700+</h3>
+                        <p>Verified Alumni</p>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <i data-lucide="building-2"></i>
+                    <div class="stat-content">
+                        <h3>150+</h3>
+                        <p>Companies</p>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <i data-lucide="calendar-check-2"></i>
+                    <div class="stat-content">
+                        <h3>80+</h3>
+                        <p>Events</p>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <i data-lucide="briefcase"></i>
+                    <div class="stat-content">
+                        <h3>300+</h3>
+                        <p>Job Opportunities</p>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <i data-lucide="map"></i>
+                    <div class="stat-content">
+                        <h3>20+</h3>
+                        <p>Cities Connected</p>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <i data-lucide="star" class="text-yellow"></i>
+                    <div class="stat-content">
+                        <h3>4.9★</h3>
+                        <p>User Rating</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Everything an Alumni Needs -->
+        <section class="features-section" id="features">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-subtitle">Everything an Alumni Needs in One Place</div>
+                    <div class="header-line"></div>
+                </div>
+                
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="feature-card">
+                        <div class="feature-icon bg-blue-soft text-blue">
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+                        <h4 class="feature-title">Alumni Directory</h4>
+                        <p class="feature-desc">Find classmates by batch, branch, company or location.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="feature-card">
+                        <div class="feature-icon bg-green-soft text-green">
+                            <i data-lucide="briefcase"></i>
+                        </div>
+                        <h4 class="feature-title">Jobs & Referrals</h4>
+                        <p class="feature-desc">Apply for jobs shared by alumni and receive referrals.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="feature-card">
+                        <div class="feature-icon bg-purple-soft text-purple">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <h4 class="feature-title">Nearby Alumni</h4>
+                        <p class="feature-desc">Meet professionals living near you.</p>
+                    </div>
+                    <!-- Feature 4 -->
+                    <div class="feature-card">
+                        <div class="feature-icon bg-orange-soft text-orange">
+                            <i data-lucide="store"></i>
+                        </div>
+                        <h4 class="feature-title">Alumni Businesses</h4>
+                        <p class="feature-desc">Support alumni startups and discover trusted services.</p>
+                    </div>
+                    <!-- Feature 5 -->
+                    <div class="feature-card">
+                        <div class="feature-icon bg-red-soft text-red">
+                            <i data-lucide="calendar"></i>
+                        </div>
+                        <h4 class="feature-title">Events & Reunions</h4>
+                        <p class="feature-desc">Register for alumni meets and networking sessions.</p>
+                    </div>
+                    <!-- Feature 6 -->
+                    <div class="feature-card">
+                        <div class="feature-icon bg-yellow-soft text-yellow-dark">
+                            <i data-lucide="trophy"></i>
+                        </div>
+                        <h4 class="feature-title">Alumni Achievements</h4>
+                        <p class="feature-desc">Celebrate career milestones and success stories.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works-section" id="how-it-works">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-subtitle">How It Works</div>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="steps-timeline">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-icon-wrapper">
+                            <span class="step-num">1</span>
+                            <div class="step-icon">
+                                <i data-lucide="user-plus"></i>
+                            </div>
+                        </div>
+                        <h4 class="step-title">Create Account</h4>
+                        <p class="step-desc">Sign up and create your profile.</p>
+                    </div>
+                    <div class="step-arrow"><i data-lucide="chevron-right"></i></div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-icon-wrapper">
+                            <span class="step-num">2</span>
+                            <div class="step-icon">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+                        </div>
+                        <h4 class="step-title">Verify Alumni</h4>
+                        <p class="step-desc">We verify your alumni status.</p>
+                    </div>
+                    <div class="step-arrow"><i data-lucide="chevron-right"></i></div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-icon-wrapper">
+                            <span class="step-num">3</span>
+                            <div class="step-icon">
+                                <i data-lucide="users"></i>
+                            </div>
+                        </div>
+                        <h4 class="step-title">Connect & Network</h4>
+                        <p class="step-desc">Find and connect with alumni.</p>
+                    </div>
+                    <div class="step-arrow"><i data-lucide="chevron-right"></i></div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card">
+                        <div class="step-icon-wrapper">
+                            <span class="step-num">4</span>
+                            <div class="step-icon">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                        </div>
+                        <h4 class="step-title">Grow Together</h4>
+                        <p class="step-desc">Share, collaborate and grow together.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore Powerful Features -->
+        <section class="showcase-section" id="showcase">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-subtitle">Explore Powerful Features</div>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="showcase-grid">
+                    <!-- Screen 1: Alumni Directory -->
+                    <div class="showcase-card">
+                        <div class="showcase-phone">
+                            <div class="showcase-screen-header">
+                                <i data-lucide="chevron-left" class="header-back"></i>
+                                <span>Alumni Directory</span>
+                                <i data-lucide="bell" class="header-bell"></i>
+                            </div>
+                            <div class="showcase-screen-content">
+                                <div class="screen-search">
+                                    <i data-lucide="search"></i>
+                                    <span>Search by name, branch, batch...</span>
+                                </div>
+                                <div class="screen-user-item">
+                                    <div class="user-avatar bg-blue">AG</div>
+                                    <div class="user-details">
+                                        <div class="user-name">Amit Gupta</div>
+                                        <div class="user-info">MCA 2010 | Software Engineer</div>
+                                    </div>
+                                    <div class="user-status active"></div>
+                                </div>
+                                <div class="screen-user-item">
+                                    <div class="user-avatar bg-indigo">VS</div>
+                                    <div class="user-details">
+                                        <div class="user-name">Vipin Singh</div>
+                                        <div class="user-info">CSE 2009 | Architect</div>
+                                    </div>
+                                    <div class="user-status active"></div>
+                                </div>
+                                <div class="screen-user-item">
+                                    <div class="user-avatar bg-green">AS</div>
+                                    <div class="user-details">
+                                        <div class="user-name">Aminesh Shukla</div>
+                                        <div class="user-info">IT 2011 | Product Manager</div>
+                                    </div>
+                                    <div class="user-status"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="showcase-title">Alumni Directory</h4>
+                        <p class="showcase-desc">Search alumni instantly.</p>
+                    </div>
+
+                    <!-- Screen 2: Nearby Alumni -->
+                    <div class="showcase-card">
+                        <div class="showcase-phone">
+                            <div class="showcase-screen-header">
+                                <i data-lucide="chevron-left" class="header-back"></i>
+                                <span>Nearby Alumni</span>
+                                <i data-lucide="map-pin" class="header-bell"></i>
+                            </div>
+                            <div class="showcase-screen-content relative-pos">
+                                <div class="map-bg">
+                                    <!-- A stylized CSS Map representation -->
+                                    <div class="map-grid"></div>
+                                    <div class="map-pin-point pin-1"><i data-lucide="map-pin"></i></div>
+                                    <div class="map-pin-point pin-2"><i data-lucide="map-pin"></i></div>
+                                    <div class="map-pin-point pin-3"><i data-lucide="map-pin"></i></div>
+                                    <div class="map-pin-point pin-main"><i data-lucide="navigation"></i></div>
+                                </div>
+                                <div class="screen-floating-alumni">
+                                    <div class="mini-avatar">VS</div>
+                                    <div class="mini-text">
+                                        <div>Vipin Singh (2.5 km away)</div>
+                                        <span class="btn-chat-mini"><i data-lucide="message-square"></i> Chat</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="showcase-title">Nearby Alumni</h4>
+                        <p class="showcase-desc">Find alumni around your location.</p>
+                    </div>
+
+                    <!-- Screen 3: Jobs & Referrals -->
+                    <div class="showcase-card">
+                        <div class="showcase-phone">
+                            <div class="showcase-screen-header">
+                                <i data-lucide="chevron-left" class="header-back"></i>
+                                <span>Jobs & Referrals</span>
+                                <i data-lucide="plus-circle" class="header-bell"></i>
+                            </div>
+                            <div class="showcase-screen-content">
+                                <div class="job-list-card">
+                                    <div class="job-badge">Referral Available</div>
+                                    <div class="job-role">Senior React Developer</div>
+                                    <div class="job-company">Google Inc.</div>
+                                    <div class="job-posted">Posted by Amit (MCA '10)</div>
+                                </div>
+                                <div class="job-list-card">
+                                    <div class="job-badge bg-green-light">Full Time</div>
+                                    <div class="job-role">Data Analyst</div>
+                                    <div class="job-company">Microsoft</div>
+                                    <div class="job-posted">Posted by Rohan (IT '15)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="showcase-title">Jobs & Referrals</h4>
+                        <p class="showcase-desc">Get referrals from alumni.</p>
+                    </div>
+
+                    <!-- Screen 4: Events & Reunions -->
+                    <div class="showcase-card">
+                        <div class="showcase-phone">
+                            <div class="showcase-screen-header">
+                                <i data-lucide="chevron-left" class="header-back"></i>
+                                <span>Events & Reunions</span>
+                                <i data-lucide="calendar" class="header-bell"></i>
+                            </div>
+                            <div class="showcase-screen-content">
+                                <div class="upcoming-events-header">Upcoming Events</div>
+                                <div class="event-card-item">
+                                    <div class="event-banner-placeholder bg-blue-soft">
+                                        <i data-lucide="image"></i>
+                                    </div>
+                                    <div class="event-card-title">MCA Connect 2026 Alumni Meet</div>
+                                    <div class="event-card-time"><i data-lucide="calendar"></i> 22 Feb 2026</div>
+                                    <div class="event-card-location"><i data-lucide="map-pin"></i> New Delhi</div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="showcase-title">Events & Reunions</h4>
+                        <p class="showcase-desc">Never miss an alumni meetup.</p>
+                    </div>
+
+                    <!-- Screen 5: Business Directory -->
+                    <div class="showcase-card">
+                        <div class="showcase-phone">
+                            <div class="showcase-screen-header">
+                                <i data-lucide="chevron-left" class="header-back"></i>
+                                <span>Businesses</span>
+                                <i data-lucide="search" class="header-bell"></i>
+                            </div>
+                            <div class="showcase-screen-content">
+                                <div class="biz-card-item">
+                                    <div class="biz-logo bg-orange-soft">TS</div>
+                                    <div class="biz-info">
+                                        <div class="biz-name">TechSolutions Ltd</div>
+                                        <div class="biz-owner">Owned by Vipin (CSE '09)</div>
+                                        <div class="biz-desc">IT Services & Consulting</div>
+                                    </div>
+                                </div>
+                                <div class="biz-card-item">
+                                    <div class="biz-logo bg-purple-soft">KF</div>
+                                    <div class="biz-info">
+                                        <div class="biz-name">KetoFoods Inc</div>
+                                        <div class="biz-owner">Owned by Riya (CHE '14)</div>
+                                        <div class="biz-desc">Healthy Diet Foods Supplier</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="showcase-title">Business Directory</h4>
+                        <p class="showcase-desc">Promote your startup or service.</p>
+                    </div>
+
+                    <!-- Screen 6: News Feed -->
+                    <div class="showcase-card">
+                        <div class="showcase-phone">
+                            <div class="showcase-screen-header">
+                                <i data-lucide="chevron-left" class="header-back"></i>
+                                <span>News Feed</span>
+                                <i data-lucide="edit-3" class="header-bell"></i>
+                            </div>
+                            <div class="showcase-screen-content">
+                                <div class="feed-post-card">
+                                    <div class="feed-author">
+                                        <div class="author-avatar bg-indigo">AS</div>
+                                        <div class="author-details">
+                                            <div class="author-name">Aminesh Shukla</div>
+                                            <div class="author-time">2 hours ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="feed-content">
+                                        Thrilled to share that I have started a new position as Principal Product Manager at Amazon! Special thanks to Harcourt mentors.
+                                    </div>
+                                    <div class="feed-actions">
+                                        <span><i data-lucide="heart"></i> 45</span>
+                                        <span><i data-lucide="message-square"></i> 12</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="showcase-title">News Feed</h4>
+                        <p class="showcase-desc">Share updates and achievements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Harcourtians Say (Testimonials) -->
+        <section class="testimonials-section" id="testimonials">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-subtitle">What Harcourtians Say</div>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="testimonials-slider-wrapper">
+                    <button class="slider-btn prev-btn" id="testimonial-prev" aria-label="Previous Testimonial">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    
+                    <div class="testimonials-viewport">
+                        <div class="testimonials-track" id="testimonial-track">
+                            <!-- Testimonial 1 -->
+                            <div class="testimonial-card">
+                                <div class="testimonial-user">
+                                    <div class="user-img-placeholder bg-blue-soft">
+                                        <i data-lucide="user"></i>
+                                    </div>
+                                    <div class="user-meta">
+                                        <h4 class="user-name">Amit Gupta</h4>
+                                        <span class="user-batch">MCA 2010 Batch</span>
+                                    </div>
+                                </div>
+                                <p class="testimonial-quote">
+                                    "Harcourtian Connect helped us reconnect our MCA batches after many years. Amazing platform!"
+                                </p>
+                                <div class="testimonial-rating">
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 2 -->
+                            <div class="testimonial-card">
+                                <div class="testimonial-user">
+                                    <div class="user-img-placeholder bg-indigo-soft">
+                                        <i data-lucide="user"></i>
+                                    </div>
+                                    <div class="user-meta">
+                                        <h4 class="user-name">Vipin Singh</h4>
+                                        <span class="user-batch">CSE 2009 Batch</span>
+                                    </div>
+                                </div>
+                                <p class="testimonial-quote">
+                                    "Nearby Alumni feature is incredibly useful during travel. Great initiative!"
+                                </p>
+                                <div class="testimonial-rating">
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                </div>
+                            </div>
+
+                            <!-- Testimonial 3 -->
+                            <div class="testimonial-card">
+                                <div class="testimonial-user">
+                                    <div class="user-img-placeholder bg-green-soft">
+                                        <i data-lucide="user"></i>
+                                    </div>
+                                    <div class="user-meta">
+                                        <h4 class="user-name">Aminesh Shukla</h4>
+                                        <span class="user-batch">IT 2011 Batch</span>
+                                    </div>
+                                </div>
+                                <p class="testimonial-quote">
+                                    "Excellent platform for networking, mentorship and career opportunities."
+                                </p>
+                                <div class="testimonial-rating">
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                    <i data-lucide="star" class="star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="slider-btn next-btn" id="testimonial-next" aria-label="Next Testimonial">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Moments from Our Community -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <div class="section-subtitle">Moments from Our Community</div>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="gallery-grid">
+                    <!-- Gallery Item 1 -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder bg-blue-dark">
+                            <i data-lucide="users-2"></i>
+                            <div class="gallery-overlay">
+                                <span>Alumni Meet 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 2 -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder bg-orange">
+                            <i data-lucide="sun"></i>
+                            <div class="gallery-overlay">
+                                <span>Holi Milan 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 3 -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder bg-indigo">
+                            <i data-lucide="sparkles"></i>
+                            <div class="gallery-overlay">
+                                <span>Networking Event</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 4 -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder bg-purple">
+                            <i data-lucide="camera"></i>
+                            <div class="gallery-overlay">
+                                <span>Group Photo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 5 -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder bg-red">
+                            <i data-lucide="mic"></i>
+                            <div class="gallery-overlay">
+                                <span>Speaker Session</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 6 -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder bg-green">
+                            <i data-lucide="award"></i>
+                            <div class="gallery-overlay">
+                                <span>Awards & Felicitations</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 7 -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder bg-yellow-dark">
+                            <i data-lucide="school"></i>
+                            <div class="gallery-overlay">
+                                <span>Campus Memories</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 8 -->
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder bg-blue-light">
+                            <i data-lucide="heart-handshake"></i>
+                            <div class="gallery-overlay">
+                                <span>Volunteers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ and App Promo Section -->
+        <section class="faq-app-section" id="faq">
+            <div class="container faq-app-container">
+                <!-- App Promo Left Column -->
+                <div class="app-promo-col" id="download">
+                    <div class="promo-content">
+                        <h2 class="promo-title">Carry Your Alumni Network Everywhere</h2>
+                        <p class="promo-desc">Stay connected anytime, anywhere.</p>
+                        
+                        <!-- Badges/QR Code layout -->
+                        <div class="download-layout">
+                            <div class="phone-mockup phone-small">
+                                <div class="phone-speaker"></div>
+                                <div class="phone-screen">
+                                    <!-- Simplified screenshot preview -->
+                                    <div class="app-container app-preview-simple bg-blue-dark">
+                                        <div class="mini-app-logo"><i data-lucide="shield-check"></i></div>
+                                        <div class="mini-app-name">Harcourtian Connect</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="download-action-box">
+                                <a href="#" class="google-play-btn" aria-label="Get it on Google Play">
+                                    <div class="play-icon">
+                                        <!-- Google Play SVG representation -->
+                                        <i data-lucide="play" class="fill-white"></i>
+                                    </div>
+                                    <div class="play-text">
+                                        <span class="play-subtitle">GET IT ON</span>
+                                        <span class="play-title">Google Play</span>
+                                    </div>
+                                </a>
+                                
+                                <div class="qr-code-box">
+                                    <div class="qr-placeholder">
+                                        <!-- A styled SVG/CSS QR representation -->
+                                        <div class="qr-pattern"></div>
+                                    </div>
+                                    <div class="qr-text">Scan QR Code to Download</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Accordion Right Column -->
+                <div class="faq-accordion-col">
+                    <h2 class="faq-title text-center-mobile">Frequently Asked Questions</h2>
+                    
+                    <div class="accordion-container">
+                        <!-- FAQ Item 1 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Is registration free?</span>
+                                <i data-lucide="chevron-down" class="accordion-chevron"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Yes, registration and membership on Harcourtian Connect are completely free for all verified alumni and students of the university.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 2 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Who can join Harcourtian Connect?</span>
+                                <i data-lucide="chevron-down" class="accordion-chevron"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Any alumnus, current student, faculty member, or retired staff member of the university can join. All profiles are verified before full access is granted.</p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 3 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>How is alumni verification done?</span>
+                                <i data-lucide="chevron-down" class="accordion-chevron"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Verification is done through batch records, roll numbers, degree certificates, college email IDs, or references from already verified alumni.</p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 4 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Is my information secure?</span>
+                                <i data-lucide="chevron-down" class="accordion-chevron"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Absolutely. We prioritize your privacy. Contact details are hidden by default and only shared with verified connections if you explicitly approve.</p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 5 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Can I promote my startup or business?</span>
+                                <i data-lucide="chevron-down" class="accordion-chevron"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Yes! We have a dedicated Business Directory feature where you can list your business/startup, offer exclusive alumni discounts, and receive support from the community.</p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 6 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Can I post jobs on the platform?</span>
+                                <i data-lucide="chevron-down" class="accordion-chevron"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Yes, verified alumni can post direct job openings or referral opportunities in their companies for students and fellow alumni to apply directly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom CTA Stripe -->
+        <section class="bottom-cta-banner" id="register">
+            <div class="container cta-banner-container">
+                <div class="cta-left">
+                    <div class="cta-logo-crest"><i data-lucide="shield-check"></i></div>
+                    <div class="cta-text">
+                        <h3>Join India's Growing Harcourtian Alumni Network</h3>
+                        <p>Reconnect with classmates, grow your career, and support fellow alumni.</p>
+                    </div>
+                </div>
+                <div class="cta-actions">
+                    <a href="#download" class="btn btn-yellow">
+                        <i data-lucide="download"></i>
+                        <span>Download App</span>
+                    </a>
+                    <a href="#" class="btn btn-outline-white">
+                        <i data-lucide="user-plus"></i>
+                        <span>Register Now</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo-container">
+                    <div class="logo-crest text-white">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title text-white">Harcourtian</span>
+                        <span class="logo-sub text-blue-light">Connect</span>
+                    </div>
+                </div>
+                <p class="footer-tagline">Building a stronger, more connected Harcourtian family worldwide.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-link-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#showcase">Alumni Directory</a></li>
+                        <li><a href="#showcase">Jobs Portal</a></li>
+                        <li><a href="#download">Download App</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-col">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="#how-it-works">Events</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#faq">FAQs</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Verification Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p>&copy; 2026 Harcourtian Connect. All rights reserved. Designed for Harcourtian Alumni.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="app.js"></script>
+</body>
+</html>

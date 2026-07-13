@@ -464,8 +464,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 phone: '08128899686',
                 linkedin: 'https://www.linkedin.com/in/mamtaswaroop/',
                 discount: '10% discount on corporate lunch bookings & catering orders'
+            },
+            {
+                id: 9,
+                name: 'Kloudrac',
+                category: 'technology',
+                owner: 'Atul Singhal',
+                branch: 'MCA',
+                batch: '2004',
+                logoClass: 'biz-logo-blue',
+                logoText: 'KR',
+                desc: 'A Salesforce Summit (Platinum) Partner specializing in cloud consulting, custom application development, Salesforce implementations, and digital transformation services.',
+                location: 'Noida, Uttar Pradesh',
+                website: 'https://www.kloudrac.com/',
+                email: 'atul.singhal.04@alumni.hbtu.ac.in',
+                phone: '',
+                linkedin: 'https://www.linkedin.com/company/kloudrac/',
+                discount: 'Free Salesforce readiness audit and IT consultation for alumni-led businesses'
+            },
+            {
+                id: 10,
+                name: 'SANMIT Technologies Private Limited',
+                category: 'technology',
+                owner: 'Sanjeev Batra',
+                branch: 'MCA',
+                batch: '2001',
+                logoClass: 'biz-logo-cyan',
+                logoText: 'ST',
+                desc: 'A global technology consulting firm providing specialized services in IT strategy, digital transformation, cloud computing, data analytics, and AI/ML implementations.',
+                location: 'Noida, Uttar Pradesh',
+                website: 'https://sanmittechnologies.com/',
+                email: 'sanjeev.batra@sanmittechnologies.com',
+                phone: '',
+                linkedin: 'https://www.linkedin.com/in/sanjeevbatra24/',
+                discount: 'Free 1-hour IT Strategy & Digital Transformation consultation for HBTU alumni startups'
             }
-
         ];
 
         // Active filter variables

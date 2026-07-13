@@ -596,6 +596,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const biz = businesses.find(b => b.id === id);
             if (!biz || !bizModal) return;
 
+            // Track details view in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'view_business_details', {
+                    'business_id': id,
+                    'business_name': biz.name,
+                    'business_category': biz.category
+                });
+            }
+
             const modalContent = bizModal.querySelector('.biz-modal-content');
 
             // Generate details view
@@ -799,6 +808,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Add to start of businesses array
                 businesses.unshift(newBiz);
+
+                // Track registration in Google Analytics
+                if (typeof gtag === 'function') {
+                    gtag('event', 'register_business', {
+                        'business_name': name,
+                        'business_category': category
+                    });
+                }
 
                 // Show success toast
                 showToast(`Success! "${name}" has been registered.`);

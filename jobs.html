@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover, search, and connect with startups, agencies, and businesses owned by Harcourtian alumni. Support the HBTU/HBTI community.">
-    <title>Alumni Businesses Directory - Harcourtian Connect</title>
+    <meta name="description" content="Explore job opportunities and request internal referrals shared by verified Harcourtian alumni. Hire top talent from HBTU/HBTI.">
+    <title>Jobs & Referrals - Harcourtian Connect</title>
     
     <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,8 +45,8 @@
                     <li><a href="index.html#features" class="nav-link">Features</a></li>
                     <li><a href="events.html" class="nav-link">Events</a></li>
                     <li><a href="alumni.html" class="nav-link">Alumni</a></li>
-                    <li><a href="jobs.html" class="nav-link">Jobs</a></li>
-                    <li><a href="businesses.html" class="nav-link active">Businesses</a></li>
+                    <li><a href="jobs.html" class="nav-link active">Jobs</a></li>
+                    <li><a href="businesses.html" class="nav-link">Businesses</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
@@ -65,8 +65,8 @@
         </div>
     </header>
 
-    <main class="businesses-page">
-        <div class="container businesses-container">
+    <main class="jobs-page">
+        <div class="container jobs-container">
             <!-- Back link -->
             <a href="index.html" class="back-to-home-link">
                 <i data-lucide="arrow-left"></i>
@@ -74,67 +74,75 @@
             </a>
             
             <!-- Hero Header -->
-            <div class="businesses-hero">
-                <h1 class="text-gradient">Alumni Businesses Hub</h1>
-                <p>Discover, support, and network with companies and startups founded by verified HBTU/HBTI alumni. Promote your services or find exclusive alumni discounts.</p>
+            <div class="jobs-hero">
+                <h1 class="text-gradient">Jobs & Referrals</h1>
+                <p>Discover career opportunities posted by fellow alumni. Request warm internal referrals, explore internships, or share job openings at your company.</p>
             </div>
 
             <!-- Search and Category Filters -->
-            <div class="biz-controls-card">
+            <div class="jobs-controls-card">
                 <div class="search-box-wrapper">
                     <i data-lucide="search"></i>
-                    <input type="text" id="biz-search" placeholder="Search businesses by name, owner, description, or location..." autocomplete="off">
+                    <input type="text" id="job-search" placeholder="Search jobs by title, company, skills, or location..." autocomplete="off">
                 </div>
                 
                 <div class="category-pills">
-                    <button class="category-pill active" data-category="all">All Industries</button>
-                    <button class="category-pill" data-category="technology">Technology & IT</button>
-                    <button class="category-pill" data-category="food">Food & Beverage</button>
-                    <button class="category-pill" data-category="education">Education & EdTech</button>
-                    <button class="category-pill" data-category="services">Professional Services</button>
-                    <button class="category-pill" data-category="healthcare">Healthcare & Biotech</button>
+                    <button class="category-pill active" data-category="all">All Jobs</button>
+                    <button class="category-pill" data-category="fulltime">Full-Time</button>
+                    <button class="category-pill" data-category="remote">Remote</button>
+                    <button class="category-pill" data-category="internship">Internships</button>
+                    <button class="category-pill" data-category="referral">Referrals Available</button>
                 </div>
             </div>
 
-            <!-- Business Directory Grid Section -->
-            <section id="directory-section" style="scroll-margin-top: 100px;">
-                <div class="biz-grid" id="biz-grid">
+            <!-- Jobs Grid Section -->
+            <section id="jobs-grid-section" style="scroll-margin-top: 100px;">
+                <div class="jobs-grid" id="jobs-grid">
                     <!-- Cards will be dynamically injected here via app.js -->
                 </div>
             </section>
 
-            <!-- Registration Form Section -->
-            <section class="biz-form-section" id="register-section">
-                <h2>List Your Business</h2>
-                <p class="subtitle">Are you an alumnus with a business or startup? Share it with the community and offer exclusive alumni benefits.</p>
+            <!-- Post a Job Form Section -->
+            <section class="jobs-form-section" id="post-job-section">
+                <h2>Post a Job / Share Referral</h2>
+                <p class="subtitle">Looking to hire Harcourtian talent or sharing a job opening at your current organization? Share the details below.</p>
                 
-                <form id="register-biz-form" novalidate>
-                    <div class="biz-form-grid">
-                        <div class="biz-form-group">
-                            <label for="register-biz-name">Business / Startup Name *</label>
-                            <input type="text" id="register-biz-name" required placeholder="e.g. Acme Tech Solutions">
+                <form id="post-job-form" novalidate>
+                    <div class="jobs-form-grid">
+                        <div class="jobs-form-group">
+                            <label for="job-title">Job Title *</label>
+                            <input type="text" id="job-title" required placeholder="e.g. Senior Frontend Developer">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-biz-category">Industry Category *</label>
-                            <select id="register-biz-category" required>
-                                <option value="technology">Technology & IT</option>
-                                <option value="food">Food & Beverage</option>
-                                <option value="education">Education & EdTech</option>
-                                <option value="services">Professional Services</option>
-                                <option value="healthcare">Healthcare & Biotech</option>
+                        <div class="jobs-form-group">
+                            <label for="job-company">Company Name *</label>
+                            <input type="text" id="job-company" required placeholder="e.g. Google Inc.">
+                        </div>
+                        
+                        <div class="jobs-form-group">
+                            <label for="job-category">Employment Type *</label>
+                            <select id="job-category" required>
+                                <option value="fulltime">Full-Time</option>
+                                <option value="remote">Remote</option>
+                                <option value="internship">Internship</option>
+                                <option value="referral">Referral Only / Other</option>
                             </select>
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-owner-name">Founder Name *</label>
-                            <input type="text" id="register-owner-name" required placeholder="e.g. Rahul Kumar">
+                        <div class="jobs-form-group">
+                            <label for="job-location">Location (City, State or 'Remote') *</label>
+                            <input type="text" id="job-location" required placeholder="e.g. Bangalore, India or Remote">
                         </div>
-                        
-                        <div class="biz-form-grid" style="margin: 0; padding: 0; gap: 16px;">
-                            <div class="biz-form-group">
-                                <label for="register-branch">Branch *</label>
-                                <select id="register-branch" required>
+
+                        <div class="jobs-form-group">
+                            <label for="job-referrer">Posted By (Your Name) *</label>
+                            <input type="text" id="job-referrer" required placeholder="e.g. Amit Gupta">
+                        </div>
+
+                        <div class="jobs-form-grid" style="margin: 0; padding: 0; gap: 16px;">
+                            <div class="jobs-form-group">
+                                <label for="job-branch">Your Branch *</label>
+                                <select id="job-branch" required>
                                     <option value="CSE">CSE</option>
                                     <option value="IT">IT</option>
                                     <option value="MCA">MCA</option>
@@ -148,47 +156,50 @@
                                     <option value="OT">Other</option>
                                 </select>
                             </div>
-                            <div class="biz-form-group">
-                                <label for="register-batch">Batch Year *</label>
-                                <input type="number" id="register-batch" min="1950" max="2027" required placeholder="e.g. 2015">
+                            <div class="jobs-form-group">
+                                <label for="job-batch">Your Batch Year *</label>
+                                <input type="number" id="job-batch" min="1950" max="2027" required placeholder="e.g. 2010">
                             </div>
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-location">Location (City, State) *</label>
-                            <input type="text" id="register-location" required placeholder="e.g. Kanpur, Uttar Pradesh">
+                        <div class="jobs-form-group">
+                            <label for="job-experience">Experience Required *</label>
+                            <input type="text" id="job-experience" required placeholder="e.g. 2-4 years, Freshers">
+                        </div>
+
+                        <div class="jobs-form-group">
+                            <label for="job-salary">Salary Range (Optional)</label>
+                            <input type="text" id="job-salary" placeholder="e.g. ₹12 - ₹18 LPA, Competitive">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-website">Website URL (Optional)</label>
-                            <input type="url" id="register-website" placeholder="e.g. https://acmetech.com">
+                        <div class="jobs-form-group">
+                            <label for="job-email">Contact Email (for resumes) *</label>
+                            <input type="email" id="job-email" required placeholder="e.g. amit@alumni.hbtu.ac.in">
+                        </div>
+
+                        <div class="jobs-form-group">
+                            <label for="job-referral-status">Referral Offered? *</label>
+                            <select id="job-referral-status" required>
+                                <option value="yes">Yes, I can refer batchmates directly</option>
+                                <option value="no">No, direct application link only</option>
+                            </select>
+                        </div>
+
+                        <div class="jobs-form-group form-group-full">
+                            <label for="job-skills">Key Skills Required (comma separated) *</label>
+                            <input type="text" id="job-skills" required placeholder="e.g. React, JavaScript, HTML, Node.js">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-email">Business Contact Email *</label>
-                            <input type="email" id="register-email" required placeholder="e.g. contact@acmetech.com">
-                        </div>
-                        
-                        <div class="biz-form-group">
-                            <label for="register-phone">Contact Number (Optional)</label>
-                            <input type="tel" id="register-phone" placeholder="e.g. +91 98765 43210">
-                        </div>
-                        
-                        <div class="biz-form-group form-group-full">
-                            <label for="register-desc">Short Description (Services, Mission) *</label>
-                            <textarea id="register-desc" required placeholder="Describe what your business does, your product line, or main services in 2-3 sentences."></textarea>
-                        </div>
-                        
-                        <div class="biz-form-group form-group-full">
-                            <label for="register-discount">Special Alumni Discount or Offer (Optional)</label>
-                            <input type="text" id="register-discount" placeholder="e.g. 15% discount for verified alumni, free consultations, etc.">
+                        <div class="jobs-form-group form-group-full">
+                            <label for="job-desc">Job Description & Application details *</label>
+                            <textarea id="job-desc" required placeholder="Provide details about the role, key responsibilities, and how to apply. If offering referral, specify what details candidates should send you."></textarea>
                         </div>
                     </div>
                     
                     <div class="form-submit-wrapper">
                         <button type="submit" class="btn btn-primary">
                             <i data-lucide="plus-circle"></i>
-                            <span>Register Business</span>
+                            <span>Post Opportunity</span>
                         </button>
                     </div>
                 </form>
@@ -197,8 +208,8 @@
     </main>
 
     <!-- Details View Modal -->
-    <div class="biz-modal" id="biz-details-modal">
-        <div class="biz-modal-content">
+    <div class="job-modal" id="job-details-modal">
+        <div class="job-modal-content">
             <!-- Content dynamically generated via JavaScript -->
         </div>
     </div>

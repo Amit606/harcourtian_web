@@ -3,6 +3,36 @@ document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
 
     /* ==========================================
+       GLOBAL TOAST NOTIFICATIONS CONTROLLER
+       ========================================== */
+    window.showToast = function (message, type = 'success') {
+        const toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) return;
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <i data-lucide="check-circle-2"></i>
+            <span>${message}</span>
+        `;
+        toastContainer.appendChild(toast);
+        lucide.createIcons();
+
+        // Trigger animation
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 10);
+
+        // Remove toast after 4 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }, 4000);
+    };
+
+
+    /* ==========================================
        STICKY HEADER SCROLL EFFECT
        ========================================== */
     const header = document.getElementById('header');
@@ -732,31 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Toast notifications controller
-        function showToast(message, type = 'success') {
-            if (!toastContainer) return;
-            const toast = document.createElement('div');
-            toast.className = `toast toast-${type}`;
-            toast.innerHTML = `
-                <i data-lucide="check-circle-2"></i>
-                <span>${message}</span>
-            `;
-            toastContainer.appendChild(toast);
-            lucide.createIcons();
-
-            // Trigger animation
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 10);
-
-            // Remove toast after 4 seconds
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => {
-                    toast.remove();
-                }, 300);
-            }, 4000);
-        }
+        // Toast notifications controller is now global
 
         // Registration form handler
         if (bizForm) {
@@ -832,4 +838,1693 @@ document.addEventListener('DOMContentLoaded', () => {
         // First render on load
         renderBusinesses();
     }
+
+    /* ==========================================
+       ALUMNI EVENTS DIRECTORY CONTROLLER
+       ========================================== */
+    const eventsGrid = document.getElementById('events-grid');
+    if (eventsGrid) {
+        // Initial list of events
+        let events = [
+            {
+                id: 1,
+                title: 'MCA Connect 2026 Alumni Meet',
+                category: 'reunion',
+                host: 'Amit Gupta',
+                branch: 'MCA',
+                batch: '2010',
+                dateTime: '2026-02-22T10:00',
+                location: 'HBTU Campus, Kanpur, UP',
+                email: 'amit.gupta.10@alumni.hbtu.ac.in',
+                desc: 'A grand gathering for the MCA 2010 batch to celebrate their journey, reconnect with batchmates, share career milestones, and relive the gold old campus memories. Lunch and campus tour included.',
+                regLink: 'https://forms.gle/mca2026reunion',
+                rsvps: 45
+            },
+            {
+                id: 2,
+                title: 'Bangalore Chapter Networking Meet',
+                category: 'chapter_meet',
+                host: 'Sanjeev Batra',
+                branch: 'MCA',
+                batch: '2001',
+                dateTime: '2026-03-15T18:00',
+                location: 'The Oberoi, MG Road, Bengaluru',
+                email: 'sanjeev.batra@sanmittechnologies.com',
+                desc: 'Join the Bengaluru chapter of Harcourtian Connect for an evening of networking, dinner, and professional discussions. Perfect opportunity to meet senior leaders and young startups in the region.',
+                regLink: '',
+                rsvps: 28
+            },
+            {
+                id: 3,
+                title: 'AI Product Growth & Content Strategy',
+                category: 'webinar',
+                host: 'Akhil Khare',
+                branch: 'CSE',
+                batch: '1994',
+                dateTime: '2026-04-05T15:00',
+                location: 'Google Meet (Virtual)',
+                email: 'akhil.khare.94@alumni.hbtu.ac.in',
+                desc: 'A masterclass on using AI content models and Search/Answer Engine Optimization for scaling startups. Akhil will showcase live demos of modern growth stacks.',
+                regLink: 'https://meet.google.com/hbtu-alumni-tech',
+                rsvps: 82
+            },
+            {
+                id: 4,
+                title: 'Harcourt Alumni Professional Golf Cup',
+                category: 'networking',
+                host: 'Mamata Swaroop',
+                branch: 'MCA',
+                batch: '1994',
+                dateTime: '2026-04-18T08:00',
+                location: 'Noida Golf Course, Sector 38, Noida',
+                email: 'mamata.swaroop.94@alumni.hbtu.ac.in',
+                desc: 'An exclusive networking event over a friendly golf tournament, followed by a networking high-tea. Open to all alumni and spouses.',
+                regLink: '',
+                rsvps: 18
+            }
+        ];
+
+        let activeEventCategory = 'all';
+        let eventSearchQuery = '';
+
+        const eventSearchInput = document.getElementById('event-search');
+        const eventFilterPills = document.querySelectorAll('.events-controls-card .category-pill');
+        const eventModal = document.getElementById('event-details-modal');
+        const eventForm = document.getElementById('host-event-form');
+
+        // Helper to format date
+        function formatEventDate(dateTimeStr) {
+            const dateObj = new Date(dateTimeStr);
+            if (isNaN(dateObj.getTime())) return dateTimeStr;
+            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return dateObj.toLocaleDateString('en-US', options);
+        }
+
+        // Render events
+        function renderEvents() {
+            eventsGrid.innerHTML = '';
+
+            const filteredEvents = events.filter(evt => {
+                const matchesCategory = activeEventCategory === 'all' || evt.category === activeEventCategory;
+                const matchesSearch = evt.title.toLowerCase().includes(eventSearchQuery.toLowerCase()) ||
+                    evt.host.toLowerCase().includes(eventSearchQuery.toLowerCase()) ||
+                    evt.desc.toLowerCase().includes(eventSearchQuery.toLowerCase()) ||
+                    evt.location.toLowerCase().includes(eventSearchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filteredEvents.length === 0) {
+                eventsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-light);">
+                        <i data-lucide="calendar-off" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;"></i>
+                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No Events Found</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keywords or category filters.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            filteredEvents.forEach(evt => {
+                const dateObj = new Date(evt.dateTime);
+                const day = !isNaN(dateObj.getTime()) ? dateObj.getDate() : '??';
+                const month = !isNaN(dateObj.getTime()) ? dateObj.toLocaleString('en-US', { month: 'short' }).toUpperCase() : 'EVT';
+                
+                // Assign gradient classes based on category
+                let gradClass = 'event-grad-blue';
+                if (evt.category === 'reunion') gradClass = 'event-grad-orange';
+                else if (evt.category === 'chapter_meet') gradClass = 'event-grad-purple';
+                else if (evt.category === 'webinar') gradClass = 'event-grad-cyan';
+                else if (evt.category === 'networking') gradClass = 'event-grad-green';
+
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="event-card-banner ${gradClass}">
+                            <div class="event-date-badge">
+                                <span class="badge-month">${month}</span>
+                                <span class="badge-day">${day}</span>
+                            </div>
+                            <span class="event-category-tag">${evt.category.replace('_', ' ')}</span>
+                        </div>
+                        <div class="event-card-body">
+                            <h3 class="event-title-text">${evt.title}</h3>
+                            <div class="event-meta-line">
+                                <i data-lucide="clock"></i>
+                                <span>${formatEventDate(evt.dateTime)}</span>
+                            </div>
+                            <div class="event-meta-line">
+                                <i data-lucide="map-pin"></i>
+                                <span>${evt.location}</span>
+                            </div>
+                            <div class="event-meta-line">
+                                <i data-lucide="users"></i>
+                                <span>Host: <strong>${evt.host}</strong> (${evt.branch} '${evt.batch.slice(-2)})</span>
+                            </div>
+                            <p class="event-short-desc">${evt.desc.length > 120 ? evt.desc.slice(0, 120) + '...' : evt.desc}</p>
+                        </div>
+                    </div>
+                    <div class="event-ctas">
+                        <span class="event-rsvp-count">${evt.rsvps} attending</span>
+                        <button class="btn btn-primary btn-view-event-details" data-id="${evt.id}">
+                            <i data-lucide="calendar-check"></i>
+                            <span>Details & RSVP</span>
+                        </button>
+                    </div>
+                `;
+                eventsGrid.appendChild(card);
+            });
+
+            lucide.createIcons();
+
+            // Bind click events on Details buttons
+            document.querySelectorAll('.btn-view-event-details').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    openEventDetailsModal(id);
+                });
+            });
+        }
+
+        // Open details modal
+        function openEventDetailsModal(id) {
+            const evt = events.find(e => e.id === id);
+            if (!evt || !eventModal) return;
+
+            // Track details view in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'view_event_details', {
+                    'event_id': id,
+                    'event_title': evt.title,
+                    'event_category': evt.category
+                });
+            }
+
+            const modalContent = eventModal.querySelector('.event-modal-content');
+
+            // Generate details view
+            const detailsHtml = `
+                <button class="event-modal-close" id="event-modal-close-btn" aria-label="Close Modal">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
+                <div class="modal-header-event">
+                    <h2 class="modal-event-title">${evt.title}</h2>
+                    <span class="event-category-badge badge-${evt.category}">${evt.category.replace('_', ' ')}</span>
+                </div>
+                
+                <div class="modal-details-list">
+                    <div class="modal-detail-item">
+                        <i data-lucide="calendar"></i>
+                        <div>
+                            <strong>Date & Time:</strong>
+                            <span>${formatEventDate(evt.dateTime)}</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="map-pin"></i>
+                        <div>
+                            <strong>Location / Venue:</strong>
+                            <span>${evt.location}</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="user"></i>
+                        <div>
+                            <strong>Organizer:</strong>
+                            <span>${evt.host} (${evt.branch} | Batch of ${evt.batch})</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="mail"></i>
+                        <div>
+                            <strong>Contact Email:</strong>
+                            <a href="mailto:${evt.email}">${evt.email}</a>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="users"></i>
+                        <div>
+                            <strong>Attendees:</strong>
+                            <span>${evt.rsvps} verified alumni RSVP'd</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-description-block">
+                    <h3>About the Event</h3>
+                    <p>${evt.desc}</p>
+                </div>
+                
+                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                    <button class="btn btn-primary" id="btn-rsvp-action" style="flex:1;" data-id="${evt.id}">
+                        <i data-lucide="check"></i>
+                        <span>RSVP / Register</span>
+                    </button>
+                    ${evt.regLink ? `
+                        <a href="${evt.regLink}" target="_blank" class="btn btn-secondary" style="flex:1;">
+                            <i data-lucide="external-link"></i>
+                            <span>External Link</span>
+                        </a>
+                    ` : ''}
+                </div>
+            `;
+
+            modalContent.innerHTML = detailsHtml;
+            eventModal.classList.add('open');
+            lucide.createIcons();
+
+            // Bind modal close button
+            const closeBtn = document.getElementById('event-modal-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeEventDetailsModal);
+            }
+
+            // Bind RSVP action
+            const rsvpBtn = document.getElementById('btn-rsvp-action');
+            if (rsvpBtn) {
+                rsvpBtn.addEventListener('click', () => {
+                    evt.rsvps += 1;
+                    if (typeof showToast === 'function') {
+                        showToast(`Awesome! You have successfully registered for "${evt.title}".`);
+                    } else {
+                        alert(`Successfully RSVP'd for ${evt.title}!`);
+                    }
+                    closeEventDetailsModal();
+                    renderEvents();
+                });
+            }
+        }
+
+        // Close details modal
+        function closeEventDetailsModal() {
+            if (eventModal) {
+                eventModal.classList.remove('open');
+            }
+        }
+
+        // Close modal when clicking outside content
+        if (eventModal) {
+            eventModal.addEventListener('click', (e) => {
+                if (e.target === eventModal) {
+                    closeEventDetailsModal();
+                }
+            });
+        }
+
+        // Search Input listener
+        if (eventSearchInput) {
+            eventSearchInput.addEventListener('input', (e) => {
+                eventSearchQuery = e.target.value;
+                renderEvents();
+            });
+        }
+
+        // Category Pills listener
+        eventFilterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                eventFilterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                activeEventCategory = pill.getAttribute('data-category');
+                renderEvents();
+            });
+        });
+
+        // Form handler
+        if (eventForm) {
+            eventForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const title = document.getElementById('event-title').value.trim();
+                const category = document.getElementById('event-category').value;
+                const host = document.getElementById('event-host').value.trim();
+                const branch = document.getElementById('event-branch').value;
+                const batch = document.getElementById('event-batch').value.trim();
+                const dateTime = document.getElementById('event-datetime').value;
+                const location = document.getElementById('event-location').value.trim();
+                const email = document.getElementById('event-email').value.trim();
+                const regLink = document.getElementById('event-reg-link').value.trim();
+                const desc = document.getElementById('event-desc').value.trim();
+
+                if (!title || !host || !batch || !dateTime || !location || !email || !desc) {
+                    alert('Please fill all required fields.');
+                    return;
+                }
+
+                const newEvent = {
+                    id: Date.now(),
+                    title,
+                    category,
+                    host,
+                    branch,
+                    batch,
+                    dateTime,
+                    location,
+                    email,
+                    regLink,
+                    desc,
+                    rsvps: 1
+                };
+
+                events.unshift(newEvent);
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'create_event', {
+                        'event_title': title,
+                        'event_category': category
+                    });
+                }
+
+                if (typeof showToast === 'function') {
+                    showToast(`Success! "${title}" has been scheduled.`);
+                } else {
+                    alert(`Success! "${title}" has been scheduled.`);
+                }
+
+                renderEvents();
+                eventForm.reset();
+
+                document.getElementById('events-grid-section').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // Render on page load
+        renderEvents();
+    }
+
+    /* ==========================================
+       ALUMNI BLOG DIRECTORY CONTROLLER
+       ========================================== */
+    const blogGrid = document.getElementById('blog-grid');
+    if (blogGrid) {
+        // Initial list of blog posts
+        let blogPosts = [
+            {
+                id: 1,
+                title: 'HBTU MCA Placement Prep Guide: Cracking Top Tech Roles',
+                category: 'placement',
+                author: 'Amit Gupta',
+                branch: 'MCA',
+                batch: '2010',
+                date: '2026-01-12',
+                readTime: 5,
+                email: 'amit.gupta.10@alumni.hbtu.ac.in',
+                summary: 'Proven strategies, coding preparation methods, and resume-building tips that helped our MCA batch secure offers from top-tier companies.',
+                content: `Preparing for campus placements can feel overwhelming, but a structured approach can make all the difference. In this guide, I share the blueprint that helped our MCA batch land roles at premium companies.\n\nFirst, focus heavily on Data Structures and Algorithms (DSA). Solve at least 150-200 curated problems covering arrays, strings, trees, and dynamic programming. Sites like LeetCode and GeeksforGeeks are invaluable resources.\n\nSecond, strengthen your core computer science fundamentals. Interviewers frequently grill candidates on Object-Oriented Programming (OOPs), Database Management Systems (DBMS), and Computer Networks. Make sure you can write clean SQL queries and explain database normalization.\n\nThird, your project portfolio matters. Instead of copy-pasting generic projects, build one unique, end-to-end working application that solves a real problem. Be ready to explain the architecture, design choices, and challenges you overcame. Best of luck!`
+            },
+            {
+                id: 2,
+                title: 'Scaling a Startup: From HBTU Hostel Room to $5M ARR',
+                category: 'story',
+                author: 'Akhil Khare',
+                branch: 'CSE',
+                batch: '1994',
+                date: '2026-01-05',
+                readTime: 8,
+                email: 'akhil.khare.94@alumni.hbtu.ac.in',
+                summary: 'The startup journey of building Dylit.info, highlighting key lessons on finding product-market fit, fundraising, and growing AI-driven tools.',
+                content: `It all started back in my hostel room at HBTI, where late-night coding sessions sparked my interest in entrepreneurship. Years later, that foundation helped me build and scale Dylit.info to over $5M in Annual Recurring Revenue (ARR).\n\nFinding product-market fit is the hardest hurdle. In the early days, we built what we thought users wanted, only to be met with silence. It was only when we started actively listening to content creators and automating their tedious SEO loops that things took off. Iterate fast, fail cheaply, and double down on what works.\n\nAnother critical lesson is building a core team that shares your vision. Skills can be taught, but attitude and resilience cannot. For young graduates looking to start up, my advice is: do not wait for the perfect idea. Start building, launch early, and let your customers guide the roadmap.`
+            },
+            {
+                id: 3,
+                title: 'Centennial Infrastructure: HBTU Campus Transformation walkthrough',
+                category: 'news',
+                author: 'Sanjeev Batra',
+                branch: 'MCA',
+                batch: '2001',
+                date: '2025-12-20',
+                readTime: 4,
+                email: 'sanjeev.batra@sanmittechnologies.com',
+                summary: 'A walkthrough of HBTU\'s newly constructed academic blocks, digital labs, and state-of-the-art startup incubation centers.',
+                content: `I recently visited our alma mater, HBTU (formerly HBTI), Kanpur, and was blown away by the infrastructure changes that have taken place. The campus has truly transformed into a modern educational hub while preserving its historical charm.\n\nThe new academic blocks boast fully air-conditioned smart classrooms and digital seminar halls. Furthermore, the laboratory infrastructure has received massive upgrades, specifically in the CSE and Chemical departments, now equipped with high-performance computing clusters.\n\nWhat excited me the most was the new Startup Incubation Center (HBTI-INC). It provides coworking spaces, mentorship circles, and initial seed funding pathways for student entrepreneurs. Seeing students brainstorm active prototypes was inspiring. The spirit of innovation is alive and thriving at Harcourt!`
+            },
+            {
+                id: 4,
+                title: 'Navigating the 2026 Tech Market: Survival Tips for Graduates',
+                category: 'insights',
+                author: 'Vipin Singh',
+                branch: 'CSE',
+                batch: '2009',
+                date: '2025-11-15',
+                readTime: 6,
+                email: 'vipin.singh@alumni.hbtu.ac.in',
+                summary: 'An analysis of the current AI-dominated software market and how graduates can adapt their skillsets to remain competitive.',
+                content: `The software industry is undergoing a massive shift. In 2026, AI is no longer a luxury feature; it is embedded in every developer's workflow. To thrive, junior developers need to transition from code writers to systems thinkers.\n\nFirst, master AI-assisted development tools (like Copilot and Cursor). Knowing how to write precise prompts, debug AI code, and verify system reliability is now a core developer skill.\n\nSecond, build system design knowledge early. While AI can write standard functions, designing robust, scalable architectures, choosing the right databases, and optimizing performance requires human judgment. Focus on learning API design, caching layers, and cloud infrastructure.\n\nLastly, build soft skills. Emotional intelligence, clear written communication, and cross-functional collaboration are traits AI cannot replicate. Learn to explain technical ideas to non-technical business partners.`
+            }
+        ];
+
+        let activeBlogCategory = 'all';
+        let blogSearchQuery = '';
+
+        const blogSearchInput = document.getElementById('blog-search');
+        const blogFilterPills = document.querySelectorAll('.blog-controls-card .category-pill');
+        const blogModal = document.getElementById('blog-details-modal');
+        const blogForm = document.getElementById('write-story-form');
+
+        // Helper to format date
+        function formatBlogDate(dateStr) {
+            const dateObj = new Date(dateStr);
+            if (isNaN(dateObj.getTime())) return dateStr;
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return dateObj.toLocaleDateString('en-US', options);
+        }
+
+        // Render blog grid
+        function renderBlog() {
+            blogGrid.innerHTML = '';
+
+            const filteredPosts = blogPosts.filter(post => {
+                const matchesCategory = activeBlogCategory === 'all' || post.category === activeBlogCategory;
+                const matchesSearch = post.title.toLowerCase().includes(blogSearchQuery.toLowerCase()) ||
+                    post.author.toLowerCase().includes(blogSearchQuery.toLowerCase()) ||
+                    post.summary.toLowerCase().includes(blogSearchQuery.toLowerCase()) ||
+                    post.content.toLowerCase().includes(blogSearchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filteredPosts.length === 0) {
+                blogGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-light);">
+                        <i data-lucide="book-open-check" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;"></i>
+                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No Articles Found</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keywords or category filters.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            filteredPosts.forEach(post => {
+                let gradClass = 'blog-grad-blue';
+                if (post.category === 'story') gradClass = 'blog-grad-orange';
+                else if (post.category === 'news') gradClass = 'blog-grad-purple';
+                else if (post.category === 'insights') gradClass = 'blog-grad-green';
+                else if (post.category === 'placement') gradClass = 'blog-grad-cyan';
+
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="blog-card-banner ${gradClass}">
+                            <span class="blog-category-tag">${post.category.replace('_', ' ')}</span>
+                            <div class="blog-read-badge">
+                                <i data-lucide="clock"></i>
+                                <span>${post.readTime} min read</span>
+                            </div>
+                        </div>
+                        <div class="blog-card-body">
+                            <span class="blog-date-text">${formatBlogDate(post.date)}</span>
+                            <h3 class="blog-title-text">${post.title}</h3>
+                            <p class="blog-short-summary">${post.summary}</p>
+                            
+                            <div class="blog-author-line">
+                                <div class="blog-author-avatar">${post.author.slice(0, 2).toUpperCase()}</div>
+                                <div class="blog-author-details">
+                                    <span class="author-name">${post.author}</span>
+                                    <span class="author-batch">${post.branch} '${post.batch.slice(-2)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-ctas">
+                        <button class="btn btn-primary btn-view-blog-details" style="width: 100%;" data-id="${post.id}">
+                            <i data-lucide="book-open"></i>
+                            <span>Read Full Story</span>
+                        </button>
+                    </div>
+                `;
+                blogGrid.appendChild(card);
+            });
+
+            lucide.createIcons();
+
+            // Bind click events on Details buttons
+            document.querySelectorAll('.btn-view-blog-details').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    openBlogDetailsModal(id);
+                });
+            });
+        }
+
+        // Open blog details modal
+        function openBlogDetailsModal(id) {
+            const post = blogPosts.find(p => p.id === id);
+            if (!post || !blogModal) return;
+
+            // Track details view in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'view_blog_details', {
+                    'post_id': id,
+                    'post_title': post.title,
+                    'post_category': post.category
+                });
+            }
+
+            const modalContent = blogModal.querySelector('.blog-modal-content');
+
+            // Generate paragraphs HTML
+            const paragraphs = post.content.split('\n\n').map(p => `<p style="margin-bottom:16px;">${p.replace(/\n/g, '<br>')}</p>`).join('');
+
+            // Generate details view
+            const detailsHtml = `
+                <button class="blog-modal-close" id="blog-modal-close-btn" aria-label="Close Modal">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
+                <div class="modal-header-blog">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                        <span class="blog-category-badge badge-${post.category}">${post.category.replace('_', ' ')}</span>
+                        <span style="font-size:0.85rem; color:var(--text-muted); display:flex; align-items:center; gap:4px;">
+                            <i data-lucide="clock" style="width:14px; height:14px;"></i> ${post.readTime} min read
+                        </span>
+                    </div>
+                    <h2 class="modal-blog-title">${post.title}</h2>
+                    <span style="font-size:0.85rem; color:var(--text-muted);">${formatBlogDate(post.date)}</span>
+                </div>
+                
+                <div class="modal-author-profile-box">
+                    <div class="author-avatar-lg">${post.author.slice(0, 2).toUpperCase()}</div>
+                    <div>
+                        <div class="author-fullname">${post.author}</div>
+                        <div class="author-subinfo">${post.branch} | Batch of ${post.batch}</div>
+                        <div class="author-contact"><i data-lucide="mail"></i> <a href="mailto:${post.email}">${post.email}</a></div>
+                    </div>
+                </div>
+
+                <div class="blog-main-content-text">
+                    ${paragraphs}
+                </div>
+                
+                <div style="display: flex; gap: 12px; margin-top: 30px; border-top: 1px solid var(--border-color); padding-top:20px;">
+                    <a href="mailto:${post.email}?subject=Inquiry%20regarding%20blog%20post:%20${encodeURIComponent(post.title)}" class="btn btn-secondary" style="flex:1;">
+                        <i data-lucide="mail"></i>
+                        <span>Contact Author</span>
+                    </a>
+                    <button class="btn btn-primary" id="blog-modal-close-btn-footer" style="flex:1;">
+                        <i data-lucide="check"></i>
+                        <span>Done Reading</span>
+                    </button>
+                </div>
+            `;
+
+            modalContent.innerHTML = detailsHtml;
+            blogModal.classList.add('open');
+            lucide.createIcons();
+
+            // Bind modal close buttons
+            const closeBtn = document.getElementById('blog-modal-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeBlogDetailsModal);
+            }
+            const doneBtn = document.getElementById('blog-modal-close-btn-footer');
+            if (doneBtn) {
+                doneBtn.addEventListener('click', closeBlogDetailsModal);
+            }
+        }
+
+        // Close details modal
+        function closeBlogDetailsModal() {
+            if (blogModal) {
+                blogModal.classList.remove('open');
+            }
+        }
+
+        // Close modal when clicking outside content
+        if (blogModal) {
+            blogModal.addEventListener('click', (e) => {
+                if (e.target === blogModal) {
+                    closeBlogDetailsModal();
+                }
+            });
+        }
+
+        // Search Input listener
+        if (blogSearchInput) {
+            blogSearchInput.addEventListener('input', (e) => {
+                blogSearchQuery = e.target.value;
+                renderBlog();
+            });
+        }
+
+        // Category Pills listener
+        blogFilterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                blogFilterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                activeBlogCategory = pill.getAttribute('data-category');
+                renderBlog();
+            });
+        });
+
+        // Form handler
+        if (blogForm) {
+            blogForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const title = document.getElementById('story-title').value.trim();
+                const category = document.getElementById('story-category').value;
+                const author = document.getElementById('story-author').value.trim();
+                const branch = document.getElementById('story-branch').value;
+                const batch = document.getElementById('story-batch').value.trim();
+                const readTime = parseInt(document.getElementById('story-readtime').value);
+                const email = document.getElementById('story-email').value.trim();
+                const summary = document.getElementById('story-summary').value.trim();
+                const content = document.getElementById('story-content').value.trim();
+
+                if (!title || !author || !batch || !readTime || !email || !summary || !content) {
+                    alert('Please fill all required fields.');
+                    return;
+                }
+
+                const today = new Date();
+                const dateStr = today.toISOString().split('T')[0];
+
+                const newPost = {
+                    id: Date.now(),
+                    title,
+                    category,
+                    author,
+                    branch,
+                    batch,
+                    date: dateStr,
+                    readTime,
+                    email,
+                    summary,
+                    content
+                };
+
+                blogPosts.unshift(newPost);
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'create_story', {
+                        'story_title': title,
+                        'story_category': category
+                    });
+                }
+
+                if (typeof showToast === 'function') {
+                    showToast(`Success! "${title}" has been published.`);
+                } else {
+                    alert(`Success! "${title}" has been published.`);
+                }
+
+                renderBlog();
+                blogForm.reset();
+
+                document.getElementById('blog-grid-section').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // Render on page load
+        renderBlog();
+    }
+
+    /* ==========================================
+       ALUMNI JOBS & REFERRALS CONTROLLER
+       ========================================== */
+    const jobsGrid = document.getElementById('jobs-grid');
+    if (jobsGrid) {
+        // Initial list of jobs
+        let jobs = [
+            {
+                id: 1,
+                title: 'Senior React Developer',
+                company: 'Google Inc.',
+                category: 'fulltime',
+                location: 'Bangalore (Hybrid)',
+                referrer: 'Amit Gupta',
+                branch: 'MCA',
+                batch: '2010',
+                experience: '5+ years',
+                salary: '₹30 - ₹45 LPA',
+                skills: ['React', 'Redux', 'JavaScript', 'TypeScript', 'Webpack'],
+                referral: 'yes',
+                email: 'amit.gupta.10@alumni.hbtu.ac.in',
+                desc: 'We are looking for a Senior React Developer to join our core search infrastructure team in Bangalore. You will build highly responsive, localized front-end features, guide junior developers, and coordinate with product leads. Internal referrals are available for verified Harcourtian alumni.'
+            },
+            {
+                id: 2,
+                title: 'Data Analyst',
+                company: 'Microsoft',
+                category: 'remote',
+                location: 'Remote (India)',
+                referrer: 'Rohan Sharma',
+                branch: 'IT',
+                batch: '2015',
+                experience: '2-4 years',
+                salary: '₹18 - ₹25 LPA',
+                skills: ['SQL', 'Python', 'PowerBI', 'Excel', 'Data Warehousing'],
+                referral: 'yes',
+                email: 'rohan.sharma.15@alumni.hbtu.ac.in',
+                desc: 'Collaborate with global business units to extract patterns, generate reports, and design clean dashboard metrics. Strong command over SQL querying, data cleaning processes, and visualization frameworks is a must.'
+            },
+            {
+                id: 3,
+                title: 'Machine Learning Intern',
+                company: 'TechSolutions Ltd',
+                category: 'internship',
+                location: 'Noida, UP',
+                referrer: 'Vipin Singh',
+                branch: 'CSE',
+                batch: '2009',
+                experience: 'Freshers / Students',
+                salary: '₹30,000 / month',
+                skills: ['Python', 'PyTorch', 'TensorFlow', 'ML Ops', 'SQL'],
+                referral: 'yes',
+                email: 'vipin.singh.09@alumni.hbtu.ac.in',
+                desc: 'An exciting internship opportunity in our AI research division. You will work alongside senior architects to clean raw training datasets, train classification models, and write reliable backend API wrappers.'
+            },
+            {
+                id: 4,
+                title: 'Principal Product Manager',
+                company: 'Amazon',
+                category: 'fulltime',
+                location: 'Hyderabad, India',
+                referrer: 'Aminesh Shukla',
+                branch: 'IT',
+                batch: '2011',
+                experience: '8+ years',
+                salary: 'Competitive',
+                skills: ['Product Strategy', 'Roadmap', 'Analytics', 'Agile', 'Scale'],
+                referral: 'no',
+                email: 'aminesh.shukla.11@alumni.hbtu.ac.in',
+                desc: 'Lead the roadmap definition and feature launching for Amazon\'s logistics and shipment networks. Coordinate cross-functionally with engineering, UX, and operations teams to optimize global delivery routes.'
+            }
+        ];
+
+        let activeJobCategory = 'all';
+        let jobSearchQuery = '';
+
+        const jobSearchInput = document.getElementById('job-search');
+        const jobFilterPills = document.querySelectorAll('.jobs-controls-card .category-pill');
+        const jobModal = document.getElementById('job-details-modal');
+        const jobForm = document.getElementById('post-job-form');
+
+        // Render jobs
+        function renderJobs() {
+            jobsGrid.innerHTML = '';
+
+            const filteredJobs = jobs.filter(job => {
+                // Category pill filters
+                let matchesCategory = activeJobCategory === 'all';
+                if (!matchesCategory) {
+                    if (activeJobCategory === 'referral') {
+                        matchesCategory = job.referral === 'yes';
+                    } else {
+                        matchesCategory = job.category === activeJobCategory;
+                    }
+                }
+
+                // Search query checks
+                const matchesSearch = job.title.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
+                    job.company.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
+                    job.location.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
+                    job.referrer.toLowerCase().includes(jobSearchQuery.toLowerCase()) ||
+                    job.skills.some(skill => skill.toLowerCase().includes(jobSearchQuery.toLowerCase()));
+
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filteredJobs.length === 0) {
+                jobsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-light);">
+                        <i data-lucide="briefcase" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;"></i>
+                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No Job Openings Found</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keywords or category filters.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            filteredJobs.forEach(job => {
+                // Logo gradient background based on company initials
+                const initials = job.company.slice(0, 2).toUpperCase();
+                const logoColors = ['biz-logo-blue', 'biz-logo-orange', 'biz-logo-purple', 'biz-logo-green', 'biz-logo-red', 'biz-logo-cyan'];
+                const colorIndex = Math.abs(job.company.charCodeAt(0) - 65) % logoColors.length;
+                const logoClass = logoColors[colorIndex];
+
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="job-card-header">
+                            <div class="job-company-logo ${logoClass}">${initials}</div>
+                            <div>
+                                <h3 class="job-card-title">${job.title}</h3>
+                                <span class="job-company-name">${job.company}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="job-badge-row">
+                            <span class="job-pill-type badge-${job.category}">${job.category}</span>
+                            <span class="job-pill-loc"><i data-lucide="map-pin"></i> ${job.location}</span>
+                        </div>
+
+                        <div class="job-details-brief">
+                            <div class="brief-item">
+                                <i data-lucide="calendar"></i>
+                                <span>Exp: ${job.experience}</span>
+                            </div>
+                            <div class="brief-item">
+                                <i data-lucide="indian-rupee"></i>
+                                <span>${job.salary}</span>
+                            </div>
+                        </div>
+
+                        <div class="job-skills-list">
+                            ${job.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                        </div>
+
+                        ${job.referral === 'yes' ? `
+                            <div class="job-referral-banner">
+                                <i data-lucide="award"></i>
+                                <span>Referral offered by ${job.referrer} (${job.branch} '${job.batch.slice(-2)})</span>
+                            </div>
+                        ` : `
+                            <div class="job-direct-banner">
+                                <i data-lucide="link"></i>
+                                <span>Direct Application</span>
+                            </div>
+                        `}
+                    </div>
+                    
+                    <div class="job-ctas">
+                        <button class="btn btn-primary btn-view-job-details" style="width: 100%;" data-id="${job.id}">
+                            <i data-lucide="eye"></i>
+                            <span>Details & Apply</span>
+                        </button>
+                    </div>
+                `;
+                jobsGrid.appendChild(card);
+            });
+
+            lucide.createIcons();
+
+            // Bind click events on Details buttons
+            document.querySelectorAll('.btn-view-job-details').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    openJobDetailsModal(id);
+                });
+            });
+        }
+
+        // Open details modal
+        function openJobDetailsModal(id) {
+            const job = jobs.find(j => j.id === id);
+            if (!job || !jobModal) return;
+
+            // Track details view in Google Analytics
+            if (typeof gtag === 'function') {
+                gtag('event', 'view_job_details', {
+                    'job_id': id,
+                    'job_title': job.title,
+                    'job_company': job.company
+                });
+            }
+
+            const modalContent = jobModal.querySelector('.job-modal-content');
+
+            // Generate details view
+            const detailsHtml = `
+                <button class="job-modal-close" id="job-modal-close-btn" aria-label="Close Modal">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
+                <div class="modal-header-job">
+                    <h2 class="modal-job-title">${job.title}</h2>
+                    <div style="font-size:1.1rem; font-weight:700; color:var(--text-dark); margin-bottom:8px;">${job.company}</div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+                        <span class="job-pill-type badge-${job.category}">${job.category}</span>
+                        <span class="job-pill-loc" style="font-size:0.8rem; background:#f1f5f9; padding:4px 12px; border-radius:50px; color:#475569;">
+                            <i data-lucide="map-pin" style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;"></i>${job.location}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="modal-details-list">
+                    <div class="modal-detail-item">
+                        <i data-lucide="briefcase"></i>
+                        <div>
+                            <strong>Experience Required:</strong>
+                            <span>${job.experience}</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="indian-rupee"></i>
+                        <div>
+                            <strong>Salary Range:</strong>
+                            <span>${job.salary}</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="user"></i>
+                        <div>
+                            <strong>Opportunity Poster:</strong>
+                            <span>${job.referrer} (${job.branch} | Batch of ${job.batch})</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="mail"></i>
+                        <div>
+                            <strong>Resume Contact:</strong>
+                            <a href="mailto:${job.email}">${job.email}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job-description-block">
+                    <h3>Role Description</h3>
+                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">${job.desc}</p>
+                    
+                    <h3 style="margin-top:20px;">Skills Required</h3>
+                    <div class="job-skills-list" style="margin-bottom:20px;">
+                        ${job.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 12px; margin-top: 24px; border-top:1px solid var(--border-color); padding-top:20px;">
+                    ${job.referral === 'yes' ? `
+                        <button class="btn btn-primary" id="btn-request-referral" style="flex:1;" data-id="${job.id}">
+                            <i data-lucide="award"></i>
+                            <span>Request Alumni Referral</span>
+                        </button>
+                    ` : `
+                        <a href="mailto:${job.email}?subject=Job%20Application%20-%20${encodeURIComponent(job.title)}" class="btn btn-primary" style="flex:1;">
+                            <i data-lucide="mail"></i>
+                            <span>Apply Directly</span>
+                        </a>
+                    `}
+                    <a href="mailto:${job.email}?subject=Inquiry%20regarding%20job%20at%20${encodeURIComponent(job.company)}" class="btn btn-secondary" style="flex:1;">
+                        <i data-lucide="info"></i>
+                        <span>Inquire Details</span>
+                    </a>
+                </div>
+            `;
+
+            modalContent.innerHTML = detailsHtml;
+            jobModal.classList.add('open');
+            lucide.createIcons();
+
+            // Bind modal close button
+            const closeBtn = document.getElementById('job-modal-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeJobDetailsModal);
+            }
+
+            // Bind Referral Request button
+            const referralBtn = document.getElementById('btn-request-referral');
+            if (referralBtn) {
+                referralBtn.addEventListener('click', () => {
+                    if (typeof showToast === 'function') {
+                        showToast(`Referral request sent to ${job.referrer}. Check your email for further instructions!`);
+                    } else {
+                        alert(`Referral request sent to ${job.referrer}!`);
+                    }
+                    closeJobDetailsModal();
+                });
+            }
+        }
+
+        // Close details modal
+        function closeJobDetailsModal() {
+            if (jobModal) {
+                jobModal.classList.remove('open');
+            }
+        }
+
+        // Close modal when clicking outside content
+        if (jobModal) {
+            jobModal.addEventListener('click', (e) => {
+                if (e.target === jobModal) {
+                    closeJobDetailsModal();
+                }
+            });
+        }
+
+        // Search Input listener
+        if (jobSearchInput) {
+            jobSearchInput.addEventListener('input', (e) => {
+                jobSearchQuery = e.target.value;
+                renderJobs();
+            });
+        }
+
+        // Category Pills listener
+        jobFilterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                jobFilterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                activeJobCategory = pill.getAttribute('data-category');
+                renderJobs();
+            });
+        });
+
+        // Form handler
+        if (jobForm) {
+            jobForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const title = document.getElementById('job-title').value.trim();
+                const company = document.getElementById('job-company').value.trim();
+                const category = document.getElementById('job-category').value;
+                const location = document.getElementById('job-location').value.trim();
+                const referrer = document.getElementById('job-referrer').value.trim();
+                const branch = document.getElementById('job-branch').value;
+                const batch = document.getElementById('job-batch').value.trim();
+                const experience = document.getElementById('job-experience').value.trim();
+                const salary = document.getElementById('job-salary').value.trim() || 'Competitive';
+                const email = document.getElementById('job-email').value.trim();
+                const referralStatus = document.getElementById('job-referral-status').value;
+                const skillsInput = document.getElementById('job-skills').value.trim();
+                const desc = document.getElementById('job-desc').value.trim();
+
+                if (!title || !company || !location || !referrer || !batch || !experience || !email || !skillsInput || !desc) {
+                    alert('Please fill all required fields.');
+                    return;
+                }
+
+                // Process comma separated skills
+                const skills = skillsInput.split(',').map(s => s.trim()).filter(s => s.length > 0);
+
+                const newJob = {
+                    id: Date.now(),
+                    title,
+                    company,
+                    category,
+                    location,
+                    referrer,
+                    branch,
+                    batch,
+                    experience,
+                    salary,
+                    skills,
+                    referral: referralStatus === 'yes' ? 'yes' : 'no',
+                    email,
+                    desc
+                };
+
+                jobs.unshift(newJob);
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'create_job', {
+                        'job_title': title,
+                        'job_company': company
+                    });
+                }
+
+                if (typeof showToast === 'function') {
+                    showToast(`Success! "${title}" job opportunity has been posted.`);
+                } else {
+                    alert(`Success! "${title}" job opportunity has been posted.`);
+                }
+
+                renderJobs();
+                jobForm.reset();
+
+                document.getElementById('jobs-grid-section').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // Render on page load
+        renderJobs();
+    }
+
+    /* ==========================================
+       CONTACT US FORM CONTROLLER
+       ========================================== */
+    const contactForm = document.getElementById('contact-us-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const branch = document.getElementById('contact-branch').value;
+            const batch = document.getElementById('contact-batch').value.trim();
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value.trim();
+
+            if (!name || !email || !batch || !message) {
+                alert('Please fill all required fields.');
+                return;
+            }
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'submit_contact', {
+                    'contact_subject': subject,
+                    'contact_branch': branch,
+                    'contact_batch': batch
+                });
+            }
+
+            if (typeof showToast === 'function') {
+                showToast('Thank you! Your message has been sent successfully. Volunteer admins will respond shortly.');
+            } else {
+                alert('Thank you! Your message has been sent successfully.');
+            }
+
+            contactForm.reset();
+        });
+    }
+
+    /* ==========================================
+       ALUMNI DIRECTORY CONTROLLER
+       ========================================== */
+    const alumniGrid = document.getElementById('alumni-grid');
+    if (alumniGrid) {
+        // Initial list of verified alumni
+        let alumniList = [
+            {
+                id: 1,
+                name: 'Amit Gupta',
+                branch: 'MCA',
+                batch: '2010',
+                role: 'Staff Software Engineer',
+                company: 'Google Inc.',
+                location: 'Bangalore, India',
+                skills: ['React', 'TypeScript', 'Node.js', 'System Design'],
+                bio: 'Amit has over 15 years of industry experience. He has previously worked at Yahoo and Directi. Amit specializes in building scalable frontend frameworks and microservices, and enjoys mentoring junior MCA students.',
+                email: 'amit.gupta.10@alumni.hbtu.ac.in',
+                linkedin: 'https://linkedin.com/in/dummy-amit-gupta',
+                distance: 2.8,
+                mapX: 40,
+                mapY: 35
+            },
+            {
+                id: 2,
+                name: 'Rohan Sharma',
+                branch: 'IT',
+                batch: '2015',
+                role: 'Data Engineering Lead',
+                company: 'Microsoft',
+                location: 'Delhi NCR, India',
+                skills: ['SQL', 'Python', 'Apache Spark', 'ETL Pipelines'],
+                bio: 'Rohan leads data warehouse engineering tracks. He coordinates cloud pipelines that process petabytes of intelligence reports daily. Rohan is open to referrals and technical mentorship reviews.',
+                email: 'rohan.sharma.15@alumni.hbtu.ac.in',
+                linkedin: 'https://linkedin.com/in/dummy-rohan-sharma',
+                distance: 12.5,
+                mapX: 25,
+                mapY: 65
+            },
+            {
+                id: 3,
+                name: 'Vipin Singh',
+                branch: 'CSE',
+                batch: '2009',
+                role: 'Co-Founder & CTO',
+                company: 'AI Lab Ltd',
+                location: 'Noida (Remote)',
+                skills: ['Python', 'PyTorch', 'TensorFlow', 'ML Ops'],
+                bio: 'Vipin was one of the early incubatees of the HBTU East Campus incubation cell. He co-founded AI Lab to build specialized neural models for retail workflows. He frequently recruits HBTU interns.',
+                email: 'vipin.singh.09@alumni.hbtu.ac.in',
+                linkedin: 'https://linkedin.com/in/dummy-vipin-singh',
+                distance: 8.2,
+                mapX: 70,
+                mapY: 20
+            },
+            {
+                id: 4,
+                name: 'Aminesh Shukla',
+                branch: 'IT',
+                batch: '2011',
+                role: 'Senior Product Manager',
+                company: 'Amazon',
+                location: 'Hyderabad, India',
+                skills: ['Product Strategy', 'Roadmaps', 'SQL', 'Agile Scale'],
+                bio: 'Aminesh coordinates shipping operations pipelines for logistics modules. He handles roadmap definitions, growth metrics, and cross-functional engineering deliverables.',
+                email: 'aminesh.shukla.11@alumni.hbtu.ac.in',
+                linkedin: 'https://linkedin.com/in/dummy-aminesh-shukla',
+                distance: 45.0,
+                mapX: 80,
+                mapY: 80
+            },
+            {
+                id: 5,
+                name: 'Nidhi Pathak',
+                branch: 'ECE',
+                batch: '2018',
+                role: 'Silicon Validation Engineer',
+                company: 'Intel Corporation',
+                location: 'Bangalore, India',
+                skills: ['VLSI', 'Verilog', 'FPGA Prototyping', 'C++'],
+                bio: 'Nidhi validation architect for core silicon processors. She specializes in post-silicon validation, debugging, and Verilog simulation frameworks. Happy to support girls in STEM.',
+                email: 'nidhi.pathak.18@alumni.hbtu.ac.in',
+                linkedin: 'https://linkedin.com/in/dummy-nidhi-pathak',
+                distance: 72.1,
+                mapX: 15,
+                mapY: 15
+            },
+            {
+                id: 6,
+                name: 'Vipul Aggarwal',
+                branch: 'CHE',
+                batch: '2013',
+                role: 'Refinery Operations Manager',
+                company: 'Reliance Industries',
+                location: 'Jamnagar, Gujarat (Remote)',
+                skills: ['Chemical Engineering', 'Plant Safety', 'Logistics'],
+                bio: 'Vipul manages refinery expansions and operations safety tracks. Proud chemical Harcourtian interested in clean energy conversion projects.',
+                email: 'vipul.aggarwal.13@alumni.hbtu.ac.in',
+                linkedin: 'https://linkedin.com/in/dummy-vipul-aggarwal',
+                distance: 120.0,
+                mapX: 90,
+                mapY: 10
+            },
+            {
+                id: 7,
+                name: 'Prakash Mishra',
+                branch: 'CSE',
+                batch: '2021',
+                role: 'Software Engineer',
+                company: 'HCL Technologies',
+                location: 'Kanpur, India',
+                skills: ['Java', 'Spring Boot', 'SQL', 'Git'],
+                bio: 'Prakash builds enterprise banking backends. He is local to Kanpur and frequently visits HBTU campus for networking meetups.',
+                email: 'prakash.mishra.21@alumni.hbtu.ac.in',
+                linkedin: 'https://linkedin.com/in/dummy-prakash-mishra',
+                distance: 1.2,
+                mapX: 45,
+                mapY: 55
+            },
+            {
+                id: 8,
+                name: 'Kirti Sen',
+                branch: 'IT',
+                batch: '2022',
+                role: 'System Engineer',
+                company: 'Tata Consultancy Services',
+                location: 'Kanpur, India',
+                skills: ['Python', 'Django', 'React', 'Docker'],
+                bio: 'Kirti works on building secure cloud dashboards. She loves connecting with recent graduates to help with placement interviews.',
+                email: 'kirti.sen.22@alumni.hbtu.ac.in',
+                linkedin: 'https://linkedin.com/in/dummy-kirti-sen',
+                distance: 4.5,
+                mapX: 60,
+                mapY: 50
+            }
+        ];
+
+        let activeBranchFilter = 'all';
+        let activeLocationFilter = 'all';
+        let alumniSearchQuery = '';
+
+        const alumniSearchInput = document.getElementById('alumni-search');
+        const alumniBranchFilterDropdown = document.getElementById('alumni-branch-filter');
+        const alumniLocationPills = document.querySelectorAll('.location-pills .location-pill');
+        const alumniModal = document.getElementById('alumni-profile-modal');
+
+        // Render Alumni
+        function renderAlumni() {
+            alumniGrid.innerHTML = '';
+
+            const filteredAlumni = alumniList.filter(alumnus => {
+                // Branch filter
+                let matchesBranch = activeBranchFilter === 'all';
+                if (!matchesBranch) {
+                    matchesBranch = alumnus.branch === activeBranchFilter;
+                }
+
+                // Location filter
+                let matchesLocation = activeLocationFilter === 'all';
+                if (!matchesLocation) {
+                    if (activeLocationFilter === 'Remote') {
+                        matchesLocation = alumnus.location.toLowerCase().includes('remote');
+                    } else if (activeLocationFilter === 'Delhi') {
+                        matchesLocation = alumnus.location.toLowerCase().includes('delhi') || alumnus.location.toLowerCase().includes('noida') || alumnus.location.toLowerCase().includes('ncr');
+                    } else {
+                        matchesLocation = alumnus.location.toLowerCase().includes(activeLocationFilter.toLowerCase());
+                    }
+                }
+
+                // Search query
+                const matchesSearch = alumnus.name.toLowerCase().includes(alumniSearchQuery.toLowerCase()) ||
+                    alumnus.company.toLowerCase().includes(alumniSearchQuery.toLowerCase()) ||
+                    alumnus.role.toLowerCase().includes(alumniSearchQuery.toLowerCase()) ||
+                    alumnus.location.toLowerCase().includes(alumniSearchQuery.toLowerCase()) ||
+                    alumnus.skills.some(skill => skill.toLowerCase().includes(alumniSearchQuery.toLowerCase()));
+
+                return matchesBranch && matchesLocation && matchesSearch;
+            });
+
+            if (filteredAlumni.length === 0) {
+                alumniGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-light);">
+                        <i data-lucide="users" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;"></i>
+                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No Alumni Found</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keywords, branch selection, or quick locations.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            filteredAlumni.forEach(alumnus => {
+                // Initial avatar placeholder
+                const initials = alumnus.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                const colors = ['biz-logo-blue', 'biz-logo-orange', 'biz-logo-purple', 'biz-logo-green', 'biz-logo-red', 'biz-logo-cyan'];
+                const colorIndex = Math.abs(alumnus.name.charCodeAt(0) - 65) % colors.length;
+                const avatarColorClass = colors[colorIndex];
+
+                const card = document.createElement('div');
+                card.className = 'alumni-card';
+                card.innerHTML = `
+                    <div class="alumni-card-badge-verified">
+                        <i data-lucide="shield-check"></i>
+                        <span>Verified Alumnus</span>
+                    </div>
+
+                    <div class="alumni-card-main-info">
+                        <div class="alumni-avatar-circle ${avatarColorClass}">${initials}</div>
+                        <h3 class="alumni-card-name">${alumnus.name}</h3>
+                        <p class="alumni-card-credentials">${alumnus.branch} | Class of ${alumnus.batch}</p>
+                        <p class="alumni-card-role">
+                            <strong>${alumnus.role}</strong>
+                            <span>at ${alumnus.company}</span>
+                        </p>
+                        <p class="alumni-card-loc"><i data-lucide="map-pin"></i> ${alumnus.location}</p>
+                    </div>
+
+                    <div class="alumni-card-skills">
+                        ${alumnus.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                    </div>
+
+                    <div class="alumni-card-actions">
+                        <button class="btn btn-primary btn-view-alumni-profile" style="width: 100%;" data-id="${alumnus.id}">
+                            <i data-lucide="user"></i>
+                            <span>View Profile & Connect</span>
+                        </button>
+                    </div>
+                `;
+                alumniGrid.appendChild(card);
+            });
+
+            lucide.createIcons();
+
+            // Bind click events
+            document.querySelectorAll('.btn-view-alumni-profile').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    openAlumniProfileModal(id);
+                });
+            });
+        }
+
+        // Open profile modal
+        function openAlumniProfileModal(id) {
+            const alumnus = alumniList.find(a => a.id === id);
+            if (!alumnus || !alumniModal) return;
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'view_alumni_profile', {
+                    'alumni_id': id,
+                    'alumni_name': alumnus.name,
+                    'alumni_company': alumnus.company
+                });
+            }
+
+            const modalContent = alumniModal.querySelector('.alumni-modal-content');
+
+            // Render modal structure
+            const initials = alumnus.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            const colors = ['biz-logo-blue', 'biz-logo-orange', 'biz-logo-purple', 'biz-logo-green', 'biz-logo-red', 'biz-logo-cyan'];
+            const colorIndex = Math.abs(alumnus.name.charCodeAt(0) - 65) % colors.length;
+            const avatarColorClass = colors[colorIndex];
+
+            const detailsHtml = `
+                <button class="alumni-modal-close" id="alumni-modal-close-btn" aria-label="Close Profile">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
+                
+                <div class="modal-profile-header">
+                    <div class="alumni-avatar-circle ${avatarColorClass}" style="width:80px; height:80px; font-size:2rem; margin-bottom:16px;">${initials}</div>
+                    <h2 style="font-size:1.8rem; font-family:var(--font-heading); color:var(--text-dark); margin-bottom:4px; display:flex; align-items:center; gap:8px;">
+                        <span>${alumnus.name}</span>
+                        <i data-lucide="shield-check" style="color:var(--accent-blue); width:24px; height:24px; fill:rgba(37,99,235,0.1);"></i>
+                    </h2>
+                    <p style="font-size:1.05rem; font-weight:600; color:var(--primary-color); margin-bottom:6px;">
+                        ${alumnus.role} @ ${alumnus.company}
+                    </p>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:20px;">
+                        <span style="font-size:0.8rem; background:#eff6ff; border:1px solid #bfdbfe; color:#1e40af; padding:4px 12px; border-radius:50px; font-weight:600;">
+                            ${alumnus.branch} | Class of ${alumnus.batch}
+                        </span>
+                        <span style="font-size:0.8rem; background:#f1f5f9; padding:4px 12px; border-radius:50px; color:#475569;">
+                            <i data-lucide="map-pin" style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:4px;"></i>${alumnus.location}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="modal-profile-body">
+                    <h3 style="font-size:1.1rem; color:var(--text-dark); margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">About</h3>
+                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.6; margin-bottom:24px;">${alumnus.bio}</p>
+
+                    <h3 style="font-size:1.1rem; color:var(--text-dark); margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">Expertise & Skills</h3>
+                    <div class="alumni-card-skills" style="margin-bottom:24px;">
+                        ${alumnus.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                    </div>
+
+                    <h3 style="font-size:1.1rem; color:var(--text-dark); margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">Get in Touch</h3>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <div style="display:flex; align-items:center; gap:12px; font-size:0.95rem; color:var(--text-muted);">
+                            <i data-lucide="mail" style="color:var(--primary-color);"></i>
+                            <span>Email: <a href="mailto:${alumnus.email}" style="color:var(--accent-blue); text-decoration:none;">${alumnus.email}</a></span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px; font-size:0.95rem; color:var(--text-muted);">
+                            <i data-lucide="linkedin" style="color:var(--primary-color);"></i>
+                            <span>LinkedIn: <a href="${alumnus.linkedin}" target="_blank" style="color:var(--accent-blue); text-decoration:none;">View Profile</a></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px; margin-top: 30px; border-top:1px solid var(--border-color); padding-top:20px;">
+                    <button class="btn btn-primary" id="btn-alumni-msg" style="flex:1;">
+                        <i data-lucide="message-square"></i>
+                        <span>Send Message (via App)</span>
+                    </button>
+                    <a href="${alumnus.linkedin}" target="_blank" class="btn btn-secondary" style="flex:1; text-align:center;">
+                        <i data-lucide="external-link"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+            `;
+
+            modalContent.innerHTML = detailsHtml;
+            alumniModal.classList.add('open');
+            lucide.createIcons();
+
+            // Bind closing actions
+            const closeBtn = document.getElementById('alumni-modal-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeAlumniProfileModal);
+            }
+
+            // Message click action
+            const msgBtn = document.getElementById('btn-alumni-msg');
+            if (msgBtn) {
+                msgBtn.addEventListener('click', () => {
+                    if (typeof showToast === 'function') {
+                        showToast(`Messaging ${alumnus.name} requires profile verification. Please open Harcourtian Connect app!`);
+                    } else {
+                        alert(`Messaging requires profile verification.`);
+                    }
+                    closeAlumniProfileModal();
+                });
+            }
+        }
+
+        // Close profile modal
+        function closeAlumniProfileModal() {
+            if (alumniModal) {
+                alumniModal.classList.remove('open');
+            }
+        }
+
+        // Close modal when clicking outside content
+        if (alumniModal) {
+            alumniModal.addEventListener('click', (e) => {
+                if (e.target === alumniModal) {
+                    closeAlumniProfileModal();
+                }
+            });
+        }
+
+        // Search Input listener
+        if (alumniSearchInput) {
+            alumniSearchInput.addEventListener('input', (e) => {
+                alumniSearchQuery = e.target.value;
+                renderAlumni();
+            });
+        }
+
+        // Branch filter listener
+        if (alumniBranchFilterDropdown) {
+            alumniBranchFilterDropdown.addEventListener('change', (e) => {
+                activeBranchFilter = e.target.value;
+                renderAlumni();
+            });
+        }
+
+        // Location Pills filter listener
+        alumniLocationPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                alumniLocationPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                activeLocationFilter = pill.getAttribute('data-location');
+                renderAlumni();
+            });
+        });
+
+        /* ==========================================
+           NEARBY ALUMNI MAP VIEW CONTROLLER
+           ========================================== */
+        const tabGridView = document.getElementById('tab-grid-view');
+        const tabMapView = document.getElementById('tab-map-view');
+        const gridViewContent = document.getElementById('grid-view-content');
+        const mapViewContent = document.getElementById('map-view-content');
+
+        if (tabGridView && tabMapView && gridViewContent && mapViewContent) {
+            tabGridView.addEventListener('click', () => {
+                tabGridView.classList.add('active');
+                tabMapView.classList.remove('active');
+                gridViewContent.classList.add('active');
+                mapViewContent.classList.remove('active');
+            });
+
+            tabMapView.addEventListener('click', () => {
+                tabMapView.classList.add('active');
+                tabGridView.classList.remove('active');
+                mapViewContent.classList.add('active');
+                gridViewContent.classList.remove('active');
+                renderNearby();
+            });
+        }
+
+        const radiusSlider = document.getElementById('radius-slider');
+        const radiusValue = document.getElementById('radius-value');
+
+        if (radiusSlider && radiusValue) {
+            radiusSlider.addEventListener('input', (e) => {
+                const radius = e.target.value;
+                radiusValue.textContent = radius;
+                renderNearby();
+            });
+        }
+
+        function renderNearby() {
+            const nearbyList = document.getElementById('nearby-list');
+            const nearbyMapCanvas = document.getElementById('nearby-map-canvas');
+            if (!nearbyList || !nearbyMapCanvas || !radiusSlider) return;
+
+            const radius = parseInt(radiusSlider.value);
+
+            // Filter alumni list by distance
+            const nearbyAlumni = alumniList.filter(alumnus => alumnus.distance <= radius);
+
+            // Clear pins except user center pin
+            const existingPins = nearbyMapCanvas.querySelectorAll('.map-pulse-marker');
+            existingPins.forEach(pin => pin.remove());
+
+            nearbyList.innerHTML = '';
+
+            if (nearbyAlumni.length === 0) {
+                nearbyList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-sm); background: var(--bg-light); margin-top: 10px;">
+                        <i data-lucide="users" style="width: 36px; height: 36px; color: var(--text-muted); margin-bottom: 8px; display:inline-block;"></i>
+                        <h4 style="font-size:0.95rem; color: var(--text-dark); margin-bottom: 4px;">No Alumni in Radius</h4>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Try increasing the radius slider to expand the search range.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            // Sort nearby alumni by proximity
+            nearbyAlumni.sort((a, b) => a.distance - b.distance);
+
+            nearbyAlumni.forEach(alumnus => {
+                // Initial avatar
+                const initials = alumnus.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                const colors = ['biz-logo-blue', 'biz-logo-orange', 'biz-logo-purple', 'biz-logo-green', 'biz-logo-red', 'biz-logo-cyan'];
+                const colorIndex = Math.abs(alumnus.name.charCodeAt(0) - 65) % colors.length;
+                const avatarColorClass = colors[colorIndex];
+
+                // Append card to sidebar list
+                const item = document.createElement('div');
+                item.className = 'nearby-alumni-item';
+                item.innerHTML = `
+                    <div class="nearby-item-header">
+                        <div class="nearby-item-avatar-circle ${avatarColorClass}">${initials}</div>
+                        <div class="nearby-item-info">
+                            <h4>${alumnus.name}</h4>
+                            <p class="role">${alumnus.role} at ${alumnus.company}</p>
+                            <p class="branch">${alumnus.branch} | Class of ${alumnus.batch}</p>
+                        </div>
+                        <div class="nearby-distance">
+                            <i data-lucide="navigation" style="width:12px; height:12px; transform: rotate(45deg); display:inline-block; vertical-align:middle; margin-right:2px;"></i>
+                            <span>${alumnus.distance} km</span>
+                        </div>
+                    </div>
+                    <div class="nearby-item-actions">
+                        <button class="btn btn-secondary btn-nearby-chat" data-name="${alumnus.name}">
+                            <i data-lucide="message-square"></i>
+                            <span>Chat</span>
+                        </button>
+                        <button class="btn btn-primary btn-view-nearby-profile" data-id="${alumnus.id}">
+                            <i data-lucide="user"></i>
+                            <span>View Profile</span>
+                        </button>
+                    </div>
+                `;
+                nearbyList.appendChild(item);
+
+                // Add pin on mock map canvas
+                const pin = document.createElement('div');
+                pin.className = 'map-pulse-marker';
+                pin.style.left = `${alumnus.mapX}%`;
+                pin.style.top = `${alumnus.mapY}%`;
+                pin.innerHTML = `
+                    <div class="pin-pulse"></div>
+                    <div class="pin-dot ${avatarColorClass}">${initials}</div>
+                    <div class="pin-tooltip">
+                        <strong>${alumnus.name}</strong>
+                        <span>${alumnus.distance} km away</span>
+                    </div>
+                `;
+                
+                // Clicking pin opens profile modal
+                pin.addEventListener('click', () => {
+                    openAlumniProfileModal(alumnus.id);
+                });
+
+                nearbyMapCanvas.appendChild(pin);
+            });
+
+            lucide.createIcons();
+
+            // Bind connect actions
+            document.querySelectorAll('.btn-nearby-chat').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const name = btn.getAttribute('data-name');
+                    if (typeof showToast === 'function') {
+                        showToast(`Messaging ${name} requires profile verification. Please open Harcourtian Connect app!`);
+                    } else {
+                        alert(`Messaging requires profile verification.`);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.btn-view-nearby-profile').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    openAlumniProfileModal(id);
+                });
+            });
+        }
+
+        // Render on page load
+        renderAlumni();
+    }
 });
+
+

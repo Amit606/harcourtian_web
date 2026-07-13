@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover, search, and connect with startups, agencies, and businesses owned by Harcourtian alumni. Support the HBTU/HBTI community.">
-    <title>Alumni Businesses Directory - Harcourtian Connect</title>
+    <meta name="description" content="Discover, search, and RSVP for reunions, chapter meets, networking events, and webinars for Harcourtian alumni. Stay connected and build your network.">
+    <title>Events & Reunions - Harcourtian Connect</title>
     
     <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,10 +43,10 @@
                 <ul>
                     <li><a href="index.html#hero" class="nav-link">Home</a></li>
                     <li><a href="index.html#features" class="nav-link">Features</a></li>
-                    <li><a href="events.html" class="nav-link">Events</a></li>
+                    <li><a href="events.html" class="nav-link active">Events</a></li>
                     <li><a href="alumni.html" class="nav-link">Alumni</a></li>
                     <li><a href="jobs.html" class="nav-link">Jobs</a></li>
-                    <li><a href="businesses.html" class="nav-link active">Businesses</a></li>
+                    <li><a href="businesses.html" class="nav-link">Businesses</a></li>
                     <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
@@ -65,8 +65,8 @@
         </div>
     </header>
 
-    <main class="businesses-page">
-        <div class="container businesses-container">
+    <main class="events-page">
+        <div class="container events-container">
             <!-- Back link -->
             <a href="index.html" class="back-to-home-link">
                 <i data-lucide="arrow-left"></i>
@@ -74,67 +74,67 @@
             </a>
             
             <!-- Hero Header -->
-            <div class="businesses-hero">
-                <h1 class="text-gradient">Alumni Businesses Hub</h1>
-                <p>Discover, support, and network with companies and startups founded by verified HBTU/HBTI alumni. Promote your services or find exclusive alumni discounts.</p>
+            <div class="events-hero">
+                <h1 class="text-gradient">Events & Reunions</h1>
+                <p>Join upcoming alumni meetups, chapter gatherings, professional webinars, and centennial reunions. Stay connected, share experiences, and build your professional network.</p>
             </div>
 
             <!-- Search and Category Filters -->
-            <div class="biz-controls-card">
+            <div class="events-controls-card">
                 <div class="search-box-wrapper">
                     <i data-lucide="search"></i>
-                    <input type="text" id="biz-search" placeholder="Search businesses by name, owner, description, or location..." autocomplete="off">
+                    <input type="text" id="event-search" placeholder="Search events by title, description, location, or host..." autocomplete="off">
                 </div>
                 
                 <div class="category-pills">
-                    <button class="category-pill active" data-category="all">All Industries</button>
-                    <button class="category-pill" data-category="technology">Technology & IT</button>
-                    <button class="category-pill" data-category="food">Food & Beverage</button>
-                    <button class="category-pill" data-category="education">Education & EdTech</button>
-                    <button class="category-pill" data-category="services">Professional Services</button>
-                    <button class="category-pill" data-category="healthcare">Healthcare & Biotech</button>
+                    <button class="category-pill active" data-category="all">All Events</button>
+                    <button class="category-pill" data-category="reunion">Reunions</button>
+                    <button class="category-pill" data-category="chapter_meet">Chapter Meets</button>
+                    <button class="category-pill" data-category="networking">Networking</button>
+                    <button class="category-pill" data-category="webinar">Webinars & Tech Talks</button>
+                    <button class="category-pill" data-category="other">Other Events</button>
                 </div>
             </div>
 
-            <!-- Business Directory Grid Section -->
-            <section id="directory-section" style="scroll-margin-top: 100px;">
-                <div class="biz-grid" id="biz-grid">
+            <!-- Events Grid Section -->
+            <section id="events-grid-section" style="scroll-margin-top: 100px;">
+                <div class="events-grid" id="events-grid">
                     <!-- Cards will be dynamically injected here via app.js -->
                 </div>
             </section>
 
-            <!-- Registration Form Section -->
-            <section class="biz-form-section" id="register-section">
-                <h2>List Your Business</h2>
-                <p class="subtitle">Are you an alumnus with a business or startup? Share it with the community and offer exclusive alumni benefits.</p>
+            <!-- Host Event Form Section -->
+            <section class="event-form-section" id="host-event-section">
+                <h2>Host / Submit an Event</h2>
+                <p class="subtitle">Organizing a batch reunion, a city chapter meetup, or a virtual webinar? Share it with the Harcourtian community.</p>
                 
-                <form id="register-biz-form" novalidate>
-                    <div class="biz-form-grid">
-                        <div class="biz-form-group">
-                            <label for="register-biz-name">Business / Startup Name *</label>
-                            <input type="text" id="register-biz-name" required placeholder="e.g. Acme Tech Solutions">
+                <form id="host-event-form" novalidate>
+                    <div class="event-form-grid">
+                        <div class="event-form-group">
+                            <label for="event-title">Event Title *</label>
+                            <input type="text" id="event-title" required placeholder="e.g. MCA 2010 15-Year Silver Jubilee Reunion">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-biz-category">Industry Category *</label>
-                            <select id="register-biz-category" required>
-                                <option value="technology">Technology & IT</option>
-                                <option value="food">Food & Beverage</option>
-                                <option value="education">Education & EdTech</option>
-                                <option value="services">Professional Services</option>
-                                <option value="healthcare">Healthcare & Biotech</option>
+                        <div class="event-form-group">
+                            <label for="event-category">Event Category *</label>
+                            <select id="event-category" required>
+                                <option value="reunion">Reunion</option>
+                                <option value="chapter_meet">Chapter Meet</option>
+                                <option value="networking">Networking</option>
+                                <option value="webinar">Webinar & Tech Talk</option>
+                                <option value="other">Other Event</option>
                             </select>
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-owner-name">Founder Name *</label>
-                            <input type="text" id="register-owner-name" required placeholder="e.g. Rahul Kumar">
+                        <div class="event-form-group">
+                            <label for="event-host">Organizer / Host Name *</label>
+                            <input type="text" id="event-host" required placeholder="e.g. Amit Gupta">
                         </div>
                         
-                        <div class="biz-form-grid" style="margin: 0; padding: 0; gap: 16px;">
-                            <div class="biz-form-group">
-                                <label for="register-branch">Branch *</label>
-                                <select id="register-branch" required>
+                        <div class="event-form-grid" style="margin: 0; padding: 0; gap: 16px;">
+                            <div class="event-form-group">
+                                <label for="event-branch">Host Branch *</label>
+                                <select id="event-branch" required>
                                     <option value="CSE">CSE</option>
                                     <option value="IT">IT</option>
                                     <option value="MCA">MCA</option>
@@ -148,47 +148,42 @@
                                     <option value="OT">Other</option>
                                 </select>
                             </div>
-                            <div class="biz-form-group">
-                                <label for="register-batch">Batch Year *</label>
-                                <input type="number" id="register-batch" min="1950" max="2027" required placeholder="e.g. 2015">
+                            <div class="event-form-group">
+                                <label for="event-batch">Host Batch Year *</label>
+                                <input type="number" id="event-batch" min="1950" max="2027" required placeholder="e.g. 2010">
                             </div>
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-location">Location (City, State) *</label>
-                            <input type="text" id="register-location" required placeholder="e.g. Kanpur, Uttar Pradesh">
+                        <div class="event-form-group">
+                            <label for="event-datetime">Date & Time *</label>
+                            <input type="datetime-local" id="event-datetime" required>
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-website">Website URL (Optional)</label>
-                            <input type="url" id="register-website" placeholder="e.g. https://acmetech.com">
+                        <div class="event-form-group">
+                            <label for="event-location">Location (Venue / City or Online Link) *</label>
+                            <input type="text" id="event-location" required placeholder="e.g. Noida Sector 62, Noida or Zoom/Google Meet Link">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-email">Business Contact Email *</label>
-                            <input type="email" id="register-email" required placeholder="e.g. contact@acmetech.com">
+                        <div class="event-form-group">
+                            <label for="event-email">Contact / Support Email *</label>
+                            <input type="email" id="event-email" required placeholder="e.g. amit.gupta@alumni.hbtu.ac.in">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-phone">Contact Number (Optional)</label>
-                            <input type="tel" id="register-phone" placeholder="e.g. +91 98765 43210">
+                        <div class="event-form-group">
+                            <label for="event-reg-link">External RSVP / Registration Link (Optional)</label>
+                            <input type="url" id="event-reg-link" placeholder="e.g. https://forms.gle/... or website link">
                         </div>
                         
-                        <div class="biz-form-group form-group-full">
-                            <label for="register-desc">Short Description (Services, Mission) *</label>
-                            <textarea id="register-desc" required placeholder="Describe what your business does, your product line, or main services in 2-3 sentences."></textarea>
-                        </div>
-                        
-                        <div class="biz-form-group form-group-full">
-                            <label for="register-discount">Special Alumni Discount or Offer (Optional)</label>
-                            <input type="text" id="register-discount" placeholder="e.g. 15% discount for verified alumni, free consultations, etc.">
+                        <div class="event-form-group form-group-full">
+                            <label for="event-desc">Event Description *</label>
+                            <textarea id="event-desc" required placeholder="Provide detail about the agenda, venue, guidelines, or requirements for attendees."></textarea>
                         </div>
                     </div>
                     
                     <div class="form-submit-wrapper">
                         <button type="submit" class="btn btn-primary">
                             <i data-lucide="plus-circle"></i>
-                            <span>Register Business</span>
+                            <span>Submit Event</span>
                         </button>
                     </div>
                 </form>
@@ -197,8 +192,8 @@
     </main>
 
     <!-- Details View Modal -->
-    <div class="biz-modal" id="biz-details-modal">
-        <div class="biz-modal-content">
+    <div class="event-modal" id="event-details-modal">
+        <div class="event-modal-content">
             <!-- Content dynamically generated via JavaScript -->
         </div>
     </div>

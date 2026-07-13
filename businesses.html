@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover, search, and connect with startups, agencies, and businesses owned by Harcourtian alumni. Support the HBTU/HBTI community.">
+    <title>Alumni Businesses Directory - Harcourtian Connect</title>
+    
+    <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header" id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo-container" id="nav-logo">
+                <div class="logo-crest">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Harcourtian</span>
+                    <span class="logo-sub">Connect</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="index.html#how-it-works" class="nav-link">Events</a></li>
+                    <li><a href="index.html#showcase" class="nav-link">Alumni</a></li>
+                    <li><a href="index.html#showcase" class="nav-link">Jobs</a></li>
+                    <li><a href="businesses.html" class="nav-link active">Businesses</a></li>
+                    <li><a href="index.html#testimonials" class="nav-link">Blog</a></li>
+                    <li><a href="index.html#faq" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://play.google.com/store/apps/details?id=com.kwh.almuniconnect" class="btn btn-primary btn-nav" id="btn-nav-download">
+                    <i data-lucide="download"></i>
+                    <span>Download App</span>
+                </a>
+                <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu" class="icon-menu"></i>
+                    <i data-lucide="x" class="icon-close hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="businesses-page">
+        <div class="container businesses-container">
+            <!-- Back link -->
+            <a href="index.html" class="back-to-home-link">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+            
+            <!-- Hero Header -->
+            <div class="businesses-hero">
+                <h1 class="text-gradient">Alumni Businesses Hub</h1>
+                <p>Discover, support, and network with companies and startups founded by verified HBTU/HBTI alumni. Promote your services or find exclusive alumni discounts.</p>
+            </div>
+
+            <!-- Search and Category Filters -->
+            <div class="biz-controls-card">
+                <div class="search-box-wrapper">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="biz-search" placeholder="Search businesses by name, owner, description, or location..." autocomplete="off">
+                </div>
+                
+                <div class="category-pills">
+                    <button class="category-pill active" data-category="all">All Industries</button>
+                    <button class="category-pill" data-category="technology">Technology & IT</button>
+                    <button class="category-pill" data-category="food">Food & Beverage</button>
+                    <button class="category-pill" data-category="education">Education & EdTech</button>
+                    <button class="category-pill" data-category="services">Professional Services</button>
+                    <button class="category-pill" data-category="healthcare">Healthcare & Biotech</button>
+                </div>
+            </div>
+
+            <!-- Business Directory Grid Section -->
+            <section id="directory-section" style="scroll-margin-top: 100px;">
+                <div class="biz-grid" id="biz-grid">
+                    <!-- Cards will be dynamically injected here via app.js -->
+                </div>
+            </section>
+
+            <!-- Registration Form Section -->
+            <section class="biz-form-section" id="register-section">
+                <h2>List Your Business</h2>
+                <p class="subtitle">Are you an alumnus with a business or startup? Share it with the community and offer exclusive alumni benefits.</p>
+                
+                <form id="register-biz-form" novalidate>
+                    <div class="biz-form-grid">
+                        <div class="biz-form-group">
+                            <label for="register-biz-name">Business / Startup Name *</label>
+                            <input type="text" id="register-biz-name" required placeholder="e.g. Acme Tech Solutions">
+                        </div>
+                        
+                        <div class="biz-form-group">
+                            <label for="register-biz-category">Industry Category *</label>
+                            <select id="register-biz-category" required>
+                                <option value="technology">Technology & IT</option>
+                                <option value="food">Food & Beverage</option>
+                                <option value="education">Education & EdTech</option>
+                                <option value="services">Professional Services</option>
+                                <option value="healthcare">Healthcare & Biotech</option>
+                            </select>
+                        </div>
+                        
+                        <div class="biz-form-group">
+                            <label for="register-owner-name">Founder Name *</label>
+                            <input type="text" id="register-owner-name" required placeholder="e.g. Rahul Kumar">
+                        </div>
+                        
+                        <div class="biz-form-grid" style="margin: 0; padding: 0; gap: 16px;">
+                            <div class="biz-form-group">
+                                <label for="register-branch">Branch *</label>
+                                <select id="register-branch" required>
+                                    <option value="CSE">CSE</option>
+                                    <option value="IT">IT</option>
+                                    <option value="MCA">MCA</option>
+                                    <option value="ECE">ECE</option>
+                                    <option value="EE">EE</option>
+                                    <option value="ME">ME</option>
+                                    <option value="CE">CE</option>
+                                    <option value="CHE">CHE</option>
+                                    <option value="BIO">Biotech</option>
+                                    <option value="IE">IE</option>
+                                    <option value="OT">Other</option>
+                                </select>
+                            </div>
+                            <div class="biz-form-group">
+                                <label for="register-batch">Batch Year *</label>
+                                <input type="number" id="register-batch" min="1950" max="2027" required placeholder="e.g. 2015">
+                            </div>
+                        </div>
+                        
+                        <div class="biz-form-group">
+                            <label for="register-location">Location (City, State) *</label>
+                            <input type="text" id="register-location" required placeholder="e.g. Kanpur, Uttar Pradesh">
+                        </div>
+                        
+                        <div class="biz-form-group">
+                            <label for="register-website">Website URL (Optional)</label>
+                            <input type="url" id="register-website" placeholder="e.g. https://acmetech.com">
+                        </div>
+                        
+                        <div class="biz-form-group">
+                            <label for="register-email">Business Contact Email *</label>
+                            <input type="email" id="register-email" required placeholder="e.g. contact@acmetech.com">
+                        </div>
+                        
+                        <div class="biz-form-group">
+                            <label for="register-phone">Contact Number (Optional)</label>
+                            <input type="tel" id="register-phone" placeholder="e.g. +91 98765 43210">
+                        </div>
+                        
+                        <div class="biz-form-group form-group-full">
+                            <label for="register-desc">Short Description (Services, Mission) *</label>
+                            <textarea id="register-desc" required placeholder="Describe what your business does, your product line, or main services in 2-3 sentences."></textarea>
+                        </div>
+                        
+                        <div class="biz-form-group form-group-full">
+                            <label for="register-discount">Special Alumni Discount or Offer (Optional)</label>
+                            <input type="text" id="register-discount" placeholder="e.g. 15% discount for verified alumni, free consultations, etc.">
+                        </div>
+                    </div>
+                    
+                    <div class="form-submit-wrapper">
+                        <button type="submit" class="btn btn-primary">
+                            <i data-lucide="plus-circle"></i>
+                            <span>Register Business</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Details View Modal -->
+    <div class="biz-modal" id="biz-details-modal">
+        <div class="biz-modal-content">
+            <!-- Content dynamically generated via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo-container">
+                    <div class="logo-crest text-white">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title text-white">Harcourtian</span>
+                        <span class="logo-sub text-blue-light">Connect</span>
+                    </div>
+                </div>
+                <p class="footer-tagline">Building a stronger, more connected Harcourtian family worldwide.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-link-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#showcase">Alumni Directory</a></li>
+                        <li><a href="index.html#showcase">Jobs Portal</a></li>
+                        <li><a href="businesses.html">Business Directory</a></li>
+                        <li>
+                           <a href="https://play.google.com/store/apps/details?id=com.kwh.almuniconnect" class="btn btn-primary btn-nav" id="btn-nav-download">
+                                <i data-lucide="download"></i>
+                                <span>Download App</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-link-col">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="index.html#how-it-works">Events</a></li>
+                        <li><a href="index.html#testimonials">Testimonials</a></li>
+                        <li><a href="index.html#faq">FAQs</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Use</a></li>
+                        <li><a href="verification-guidelines.html">Verification Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p>&copy; 2026 Harcourtian Connect. All rights reserved. Designed for Harcourtian Alumni.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="app.js"></script>
+</body>
+</html>

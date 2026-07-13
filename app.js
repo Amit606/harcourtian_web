@@ -265,6 +265,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="showcase-screen-content">
                     <div class="biz-card-item">
+                        <div class="biz-logo bg-blue-soft">DY</div>
+                        <div class="biz-info">
+                            <div class="biz-name">Dylit.info</div>
+                            <div class="biz-owner">Owned by Akhil (CSE '94)</div>
+                            <div class="biz-desc">AI Content Growth Platform</div>
+                        </div>
+                    </div>
+                    <div class="biz-card-item" style="margin-top: 6px;">
                         <div class="biz-logo bg-orange-soft">TS</div>
                         <div class="biz-info">
                             <div class="biz-name">TechSolutions Ltd</div>
@@ -348,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 3. Switch screen logic
-        window.switchPhoneScreen = function(screenName) {
+        window.switchPhoneScreen = function (screenName) {
             // Hide all screens
             document.querySelectorAll('.phone-mockup .app-screen').forEach(scr => {
                 scr.style.display = 'none';
@@ -414,5 +422,364 @@ document.addEventListener('DOMContentLoaded', () => {
         // Event card inside dashboard
         const appEventCard = document.querySelector('.phone-mockup .app-event-card');
         if (appEventCard) appEventCard.addEventListener('click', () => window.switchPhoneScreen('events'));
+    }
+
+    /* ==========================================
+       ALUMNI BUSINESS DIRECTORY CONTROLLER
+       ========================================== */
+    const bizGrid = document.getElementById('biz-grid');
+    if (bizGrid) {
+        // Initial list of businesses
+        let businesses = [
+            {
+                id: 7,
+                name: 'Dylit.info',
+                category: 'technology',
+                owner: 'Akhil Khare',
+                branch: 'CSE',
+                batch: '1994',
+                logoClass: 'biz-logo-cyan',
+                logoText: 'DY',
+                desc: 'An AI-powered content growth platform designed for creators, solopreneurs, and small businesses to simplify content creation, SEO/AEO optimization, and multi-channel promotion.',
+                location: 'Hyderabad, Telangana',
+                website: 'https://home.dylit.info/',
+                email: 'akhil.khare.94@alumni.hbtu.ac.in',
+                phone: '',
+                linkedin: 'https://www.linkedin.com/in/akhil-khare-219a4/',
+                discount: 'Free Pro Plan access for 1 months for all HBTU/HBTI Alumni'
+            },
+            {
+                id: 8,
+                name: 'Dabbax Food Aggregator P Ltd',
+                category: 'food',
+                owner: 'Mamata Swaroop',
+                branch: 'MCA',
+                batch: '1994',
+                logoClass: 'biz-logo-orange',
+                logoText: 'DB',
+                desc: 'A tech-driven corporate food aggregator providing customized food catering solutions, daily high-quality meal subscriptions, and digital food court management services.',
+                location: 'Noida Sector 78, Noida',
+                website: 'https://play.google.com/store/apps/details?id=com.dabbax.customer&hl=en_IN',
+                email: 'mamata.swaroop.94@alumni.hbtu.ac.in',
+                phone: '08128899686',
+                linkedin: 'https://www.linkedin.com/in/mamtaswaroop/',
+                discount: '10% discount on corporate lunch bookings & catering orders'
+            }
+
+        ];
+
+        // Active filter variables
+        let activeCategory = 'all';
+        let searchQuery = '';
+
+        // DOM elements
+        const searchInput = document.getElementById('biz-search');
+        const filterPills = document.querySelectorAll('.category-pill');
+        const bizModal = document.getElementById('biz-details-modal');
+        const bizForm = document.getElementById('register-biz-form');
+        const toastContainer = document.getElementById('toast-container');
+
+        // Render function
+        function renderBusinesses() {
+            bizGrid.innerHTML = '';
+
+            const filtered = businesses.filter(biz => {
+                const matchesCategory = activeCategory === 'all' || biz.category === activeCategory;
+                const matchesSearch = biz.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    biz.owner.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    biz.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    biz.location.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                bizGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-light);">
+                        <i data-lucide="info" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;"></i>
+                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No Businesses Found</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keywords or category filters.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            filtered.forEach(biz => {
+                const card = document.createElement('div');
+                card.className = 'biz-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="biz-card-header">
+                            <div class="biz-logo-placeholder ${biz.logoClass}">${biz.logoText}</div>
+                            <div class="biz-meta">
+                                <h3 class="biz-card-title">${biz.name}</h3>
+                                <span class="biz-category-badge">${biz.category}</span>
+                            </div>
+                        </div>
+                        <div class="biz-owner-info">
+                            <i data-lucide="user"></i>
+                            <span>Owned by <strong class="biz-owner-name">${biz.owner}</strong> (${biz.branch} '${biz.batch.slice(-2)})</span>
+                        </div>
+                        <p class="biz-desc">${biz.desc}</p>
+                        <div class="biz-location">
+                            <i data-lucide="map-pin"></i>
+                            <span>${biz.location}</span>
+                        </div>
+                        ${biz.discount ? `
+                            <div class="biz-discount-badge">
+                                <i data-lucide="tag"></i>
+                                <span>${biz.discount}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="biz-ctas">
+                        <a href="${biz.website}" target="_blank" class="btn btn-secondary">
+                            <i data-lucide="globe"></i>
+                            <span>Website</span>
+                        </a>
+                        <button class="btn btn-primary btn-view-details" data-id="${biz.id}">
+                            <i data-lucide="eye"></i>
+                            <span>Details</span>
+                        </button>
+                    </div>
+                `;
+                bizGrid.appendChild(card);
+            });
+
+            // Re-bind Lucide icons
+            lucide.createIcons();
+
+            // Bind click events on new Details buttons
+            document.querySelectorAll('.btn-view-details').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    openDetailsModal(id);
+                });
+            });
+        }
+
+        // Open details modal
+        function openDetailsModal(id) {
+            const biz = businesses.find(b => b.id === id);
+            if (!biz || !bizModal) return;
+
+            const modalContent = bizModal.querySelector('.biz-modal-content');
+
+            // Generate details view
+            const detailsHtml = `
+                <button class="biz-modal-close" id="modal-close-btn" aria-label="Close Modal">
+                    <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+                </button>
+                <div class="modal-header-biz">
+                    <div class="biz-logo-placeholder ${biz.logoClass}">${biz.logoText}</div>
+                    <div>
+                        <h2 class="modal-biz-title">${biz.name}</h2>
+                        <span class="biz-category-badge">${biz.category}</span>
+                    </div>
+                </div>
+                
+                <div class="modal-details-list">
+                    <div class="modal-detail-item">
+                        <i data-lucide="user"></i>
+                        <div>
+                            <strong>Founder:</strong>
+                            <span>${biz.owner} (${biz.branch} | Batch of ${biz.batch})</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="map-pin"></i>
+                        <div>
+                            <strong>Location:</strong>
+                            <span>${biz.location}</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="mail"></i>
+                        <div>
+                            <strong>Email:</strong>
+                            <a href="mailto:${biz.email}">${biz.email}</a>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="phone"></i>
+                        <div>
+                            <strong>Contact:</strong>
+                            <a href="tel:${biz.phone}">${biz.phone}</a>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="linkedin"></i>
+                        <div>
+                            <strong>LinkedIn:</strong>
+                            <a href="${biz.linkedin}" target="_blank">Founder Profile</a>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i data-lucide="globe"></i>
+                        <div>
+                            <strong>Website:</strong>
+                            <a href="${biz.website}" target="_blank">${biz.website}</a>
+                        </div>
+                    </div>
+                </div>
+                
+                ${biz.discount ? `
+                    <div class="biz-discount-badge" style="margin-bottom: 24px; padding: 14px;">
+                        <i data-lucide="tag" style="width: 20px; height: 20px;"></i>
+                        <div>
+                            <strong style="display:block; font-size:0.95rem; color:#065f46; margin-bottom:2px;">Alumni Exclusive Offer</strong>
+                            <span style="font-size:0.85rem; color:#0f5132;">${biz.discount}</span>
+                        </div>
+                    </div>
+                ` : ''}
+                
+                <div style="display: flex; gap: 12px; margin-top: 10px;">
+                    <a href="${biz.website}" target="_blank" class="btn btn-primary" style="flex:1;">
+                        <i data-lucide="external-link"></i>
+                        <span>Visit Website</span>
+                    </a>
+                    <a href="mailto:${biz.email}?subject=Inquiry%20from%20Harcourtian%20Connect%20-%20${encodeURIComponent(biz.name)}" class="btn btn-secondary" style="flex:1;">
+                        <i data-lucide="mail"></i>
+                        <span>Send Inquiry</span>
+                    </a>
+                </div>
+            `;
+
+            modalContent.innerHTML = detailsHtml;
+            bizModal.classList.add('open');
+            lucide.createIcons();
+
+            // Bind modal close button
+            const closeBtn = document.getElementById('modal-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeDetailsModal);
+            }
+        }
+
+        // Close details modal
+        function closeDetailsModal() {
+            if (bizModal) {
+                bizModal.classList.remove('open');
+            }
+        }
+
+        // Close modal when clicking outside content
+        if (bizModal) {
+            bizModal.addEventListener('click', (e) => {
+                if (e.target === bizModal) {
+                    closeDetailsModal();
+                }
+            });
+        }
+
+        // Search Input listener
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderBusinesses();
+            });
+        }
+
+        // Category Pills listener
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                filterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                activeCategory = pill.getAttribute('data-category');
+                renderBusinesses();
+            });
+        });
+
+        // Toast notifications controller
+        function showToast(message, type = 'success') {
+            if (!toastContainer) return;
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <i data-lucide="check-circle-2"></i>
+                <span>${message}</span>
+            `;
+            toastContainer.appendChild(toast);
+            lucide.createIcons();
+
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+
+            // Remove toast after 4 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4000);
+        }
+
+        // Registration form handler
+        if (bizForm) {
+            bizForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get fields
+                const name = document.getElementById('register-biz-name').value.trim();
+                const category = document.getElementById('register-biz-category').value;
+                const owner = document.getElementById('register-owner-name').value.trim();
+                const branch = document.getElementById('register-branch').value;
+                const batch = document.getElementById('register-batch').value.trim();
+                const location = document.getElementById('register-location').value.trim();
+                const website = document.getElementById('register-website').value.trim() || '#';
+                const email = document.getElementById('register-email').value.trim();
+                const phone = document.getElementById('register-phone').value.trim();
+                const desc = document.getElementById('register-desc').value.trim();
+                const discount = document.getElementById('register-discount').value.trim();
+
+                // Validation
+                if (!name || !owner || !batch || !location || !email || !desc) {
+                    alert('Please fill all required fields.');
+                    return;
+                }
+
+                // Create a random gradient and initials for logo
+                const initials = name.slice(0, 2).toUpperCase();
+                const logoClasses = ['biz-logo-blue', 'biz-logo-orange', 'biz-logo-purple', 'biz-logo-green', 'biz-logo-red', 'biz-logo-cyan'];
+                const randomLogoClass = logoClasses[Math.floor(Math.random() * logoClasses.length)];
+
+                // Add new business object to list
+                const newBiz = {
+                    id: Date.now(),
+                    name,
+                    category,
+                    owner,
+                    branch,
+                    batch,
+                    logoClass: randomLogoClass,
+                    logoText: initials,
+                    desc,
+                    location,
+                    website,
+                    email,
+                    phone: phone || '+91 99999 88888',
+                    linkedin: 'https://linkedin.com',
+                    discount
+                };
+
+                // Add to start of businesses array
+                businesses.unshift(newBiz);
+
+                // Show success toast
+                showToast(`Success! "${name}" has been registered.`);
+
+                // Re-render and clear form
+                renderBusinesses();
+                bizForm.reset();
+
+                // Scroll back up to the directory grid smoothly
+                document.getElementById('directory-section').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // First render on load
+        renderBusinesses();
     }
 });

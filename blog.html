@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover, search, and connect with startups, agencies, and businesses owned by Harcourtian alumni. Support the HBTU/HBTI community.">
-    <title>Alumni Businesses Directory - Harcourtian Connect</title>
+    <meta name="description" content="Read insights, success stories, campus updates, and career tips written by and for Harcourtian alumni. Share your story with the HBTU/HBTI community.">
+    <title>Blog & Alumni Stories - Harcourtian Connect</title>
     
     <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,8 +46,8 @@
                     <li><a href="events.html" class="nav-link">Events</a></li>
                     <li><a href="alumni.html" class="nav-link">Alumni</a></li>
                     <li><a href="jobs.html" class="nav-link">Jobs</a></li>
-                    <li><a href="businesses.html" class="nav-link active">Businesses</a></li>
-                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="businesses.html" class="nav-link">Businesses</a></li>
+                    <li><a href="blog.html" class="nav-link active">Blog</a></li>
                     <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
@@ -65,8 +65,8 @@
         </div>
     </header>
 
-    <main class="businesses-page">
-        <div class="container businesses-container">
+    <main class="blog-page">
+        <div class="container blog-container">
             <!-- Back link -->
             <a href="index.html" class="back-to-home-link">
                 <i data-lucide="arrow-left"></i>
@@ -74,67 +74,65 @@
             </a>
             
             <!-- Hero Header -->
-            <div class="businesses-hero">
-                <h1 class="text-gradient">Alumni Businesses Hub</h1>
-                <p>Discover, support, and network with companies and startups founded by verified HBTU/HBTI alumni. Promote your services or find exclusive alumni discounts.</p>
+            <div class="blog-hero">
+                <h1 class="text-gradient">Blog & Alumni Stories</h1>
+                <p>Read success stories, career milestones, placement tips, and campus news written by Harcourtian alumni. Share your achievements and inspire the next generation.</p>
             </div>
 
             <!-- Search and Category Filters -->
-            <div class="biz-controls-card">
+            <div class="blog-controls-card">
                 <div class="search-box-wrapper">
                     <i data-lucide="search"></i>
-                    <input type="text" id="biz-search" placeholder="Search businesses by name, owner, description, or location..." autocomplete="off">
+                    <input type="text" id="blog-search" placeholder="Search articles by title, tags, summary, or author..." autocomplete="off">
                 </div>
                 
                 <div class="category-pills">
-                    <button class="category-pill active" data-category="all">All Industries</button>
-                    <button class="category-pill" data-category="technology">Technology & IT</button>
-                    <button class="category-pill" data-category="food">Food & Beverage</button>
-                    <button class="category-pill" data-category="education">Education & EdTech</button>
-                    <button class="category-pill" data-category="services">Professional Services</button>
-                    <button class="category-pill" data-category="healthcare">Healthcare & Biotech</button>
+                    <button class="category-pill active" data-category="all">All Stories</button>
+                    <button class="category-pill" data-category="story">Success Stories</button>
+                    <button class="category-pill" data-category="news">Campus News</button>
+                    <button class="category-pill" data-category="insights">Industry Insights</button>
+                    <button class="category-pill" data-category="placement">Placement & Career Tips</button>
                 </div>
             </div>
 
-            <!-- Business Directory Grid Section -->
-            <section id="directory-section" style="scroll-margin-top: 100px;">
-                <div class="biz-grid" id="biz-grid">
+            <!-- Blog Grid Section -->
+            <section id="blog-grid-section" style="scroll-margin-top: 100px;">
+                <div class="blog-grid" id="blog-grid">
                     <!-- Cards will be dynamically injected here via app.js -->
                 </div>
             </section>
 
-            <!-- Registration Form Section -->
-            <section class="biz-form-section" id="register-section">
-                <h2>List Your Business</h2>
-                <p class="subtitle">Are you an alumnus with a business or startup? Share it with the community and offer exclusive alumni benefits.</p>
+            <!-- Submit a Story Form Section -->
+            <section class="blog-form-section" id="write-story-section">
+                <h2>Share Your Story / Guest Post</h2>
+                <p class="subtitle">Got an achievement, a career milestone, placement tips, or campus memories to share? Publish a guest post for the community.</p>
                 
-                <form id="register-biz-form" novalidate>
-                    <div class="biz-form-grid">
-                        <div class="biz-form-group">
-                            <label for="register-biz-name">Business / Startup Name *</label>
-                            <input type="text" id="register-biz-name" required placeholder="e.g. Acme Tech Solutions">
+                <form id="write-story-form" novalidate>
+                    <div class="blog-form-grid">
+                        <div class="blog-form-group">
+                            <label for="story-title">Article Title *</label>
+                            <input type="text" id="story-title" required placeholder="e.g. My Journey from HBTU MCA to Senior Architect at Salesforce">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-biz-category">Industry Category *</label>
-                            <select id="register-biz-category" required>
-                                <option value="technology">Technology & IT</option>
-                                <option value="food">Food & Beverage</option>
-                                <option value="education">Education & EdTech</option>
-                                <option value="services">Professional Services</option>
-                                <option value="healthcare">Healthcare & Biotech</option>
+                        <div class="blog-form-group">
+                            <label for="story-category">Category *</label>
+                            <select id="story-category" required>
+                                <option value="story">Success Story</option>
+                                <option value="news">Campus News</option>
+                                <option value="insights">Industry Insights</option>
+                                <option value="placement">Placement & Career Tips</option>
                             </select>
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-owner-name">Founder Name *</label>
-                            <input type="text" id="register-owner-name" required placeholder="e.g. Rahul Kumar">
+                        <div class="blog-form-group">
+                            <label for="story-author">Author Name *</label>
+                            <input type="text" id="story-author" required placeholder="e.g. Amit Gupta">
                         </div>
                         
-                        <div class="biz-form-grid" style="margin: 0; padding: 0; gap: 16px;">
-                            <div class="biz-form-group">
-                                <label for="register-branch">Branch *</label>
-                                <select id="register-branch" required>
+                        <div class="blog-form-grid" style="margin: 0; padding: 0; gap: 16px;">
+                            <div class="blog-form-group">
+                                <label for="story-branch">Branch *</label>
+                                <select id="story-branch" required>
                                     <option value="CSE">CSE</option>
                                     <option value="IT">IT</option>
                                     <option value="MCA">MCA</option>
@@ -148,47 +146,37 @@
                                     <option value="OT">Other</option>
                                 </select>
                             </div>
-                            <div class="biz-form-group">
-                                <label for="register-batch">Batch Year *</label>
-                                <input type="number" id="register-batch" min="1950" max="2027" required placeholder="e.g. 2015">
+                            <div class="blog-form-group">
+                                <label for="story-batch">Batch Year *</label>
+                                <input type="number" id="story-batch" min="1950" max="2027" required placeholder="e.g. 2010">
                             </div>
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-location">Location (City, State) *</label>
-                            <input type="text" id="register-location" required placeholder="e.g. Kanpur, Uttar Pradesh">
+                        <div class="blog-form-group">
+                            <label for="story-readtime">Estimated Reading Time (Minutes) *</label>
+                            <input type="number" id="story-readtime" min="1" max="60" required placeholder="e.g. 5">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-website">Website URL (Optional)</label>
-                            <input type="url" id="register-website" placeholder="e.g. https://acmetech.com">
+                        <div class="blog-form-group">
+                            <label for="story-email">Contact Email *</label>
+                            <input type="email" id="story-email" required placeholder="e.g. amit@alumni.hbtu.ac.in">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-email">Business Contact Email *</label>
-                            <input type="email" id="register-email" required placeholder="e.g. contact@acmetech.com">
+                        <div class="blog-form-group form-group-full">
+                            <label for="story-summary">Short Summary (1-2 sentences) *</label>
+                            <input type="text" id="story-summary" required placeholder="Brief summary to show in the blog card previews.">
                         </div>
                         
-                        <div class="biz-form-group">
-                            <label for="register-phone">Contact Number (Optional)</label>
-                            <input type="tel" id="register-phone" placeholder="e.g. +91 98765 43210">
-                        </div>
-                        
-                        <div class="biz-form-group form-group-full">
-                            <label for="register-desc">Short Description (Services, Mission) *</label>
-                            <textarea id="register-desc" required placeholder="Describe what your business does, your product line, or main services in 2-3 sentences."></textarea>
-                        </div>
-                        
-                        <div class="biz-form-group form-group-full">
-                            <label for="register-discount">Special Alumni Discount or Offer (Optional)</label>
-                            <input type="text" id="register-discount" placeholder="e.g. 15% discount for verified alumni, free consultations, etc.">
+                        <div class="blog-form-group form-group-full">
+                            <label for="story-content">Article Content *</label>
+                            <textarea id="story-content" required placeholder="Write your full story or article here. Use paragraphs to format your text."></textarea>
                         </div>
                     </div>
                     
                     <div class="form-submit-wrapper">
                         <button type="submit" class="btn btn-primary">
-                            <i data-lucide="plus-circle"></i>
-                            <span>Register Business</span>
+                            <i data-lucide="edit-3"></i>
+                            <span>Publish Story</span>
                         </button>
                     </div>
                 </form>
@@ -197,8 +185,8 @@
     </main>
 
     <!-- Details View Modal -->
-    <div class="biz-modal" id="biz-details-modal">
-        <div class="biz-modal-content">
+    <div class="blog-modal" id="blog-details-modal">
+        <div class="blog-modal-content">
             <!-- Content dynamically generated via JavaScript -->
         </div>
     </div>

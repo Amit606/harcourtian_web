@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Search and connect with verified Harcourtian Alumni from HBTI/HBTU. Filter by branch, batch year, location, and industry.">
+    <title>Alumni Directory - Harcourtian Connect</title>
+    
+    <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DMYDPWS41"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2DMYDPWS41');
+    </script>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="main-header" id="header">
+        <div class="header-container">
+            <a href="index.html" class="logo-container" id="nav-logo">
+                <div class="logo-crest">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Harcourtian</span>
+                    <span class="logo-sub">Connect</span>
+                </div>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="index.html#features" class="nav-link">Features</a></li>
+                    <li><a href="events.html" class="nav-link">Events</a></li>
+                    <li><a href="alumni.html" class="nav-link active">Alumni</a></li>
+                    <li><a href="jobs.html" class="nav-link">Jobs</a></li>
+                    <li><a href="businesses.html" class="nav-link">Businesses</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://play.google.com/store/apps/details?id=com.kwh.almuniconnect" class="btn btn-primary btn-nav" id="btn-nav-download">
+                    <i data-lucide="download"></i>
+                    <span>Download App</span>
+                </a>
+                <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu" class="icon-menu"></i>
+                    <i data-lucide="x" class="icon-close hidden"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="alumni-page">
+        <div class="container alumni-container">
+            <!-- Back link -->
+            <a href="index.html" class="back-to-home-link">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+            
+            <!-- Hero Header -->
+            <div class="alumni-hero">
+                <h1 class="text-gradient">Alumni Directory</h1>
+                <p>Reconnect, network, and collaborate with verified Harcourtians worldwide. Search by name, company, branch, batch year, or location.</p>
+            </div>
+
+            <!-- View Selector Tabs -->
+            <div class="directory-tabs">
+                <button class="dir-tab active" id="tab-grid-view">
+                    <i data-lucide="grid"></i>
+                    <span>Directory Grid</span>
+                </button>
+                <button class="dir-tab" id="tab-map-view">
+                    <i data-lucide="map"></i>
+                    <span>Nearby Map View</span>
+                </button>
+            </div>
+
+            <!-- TAB 1: Grid View Content -->
+            <div id="grid-view-content" class="tab-content active">
+                <!-- Search and Filters Cards -->
+                <div class="alumni-controls-card">
+                    <div class="controls-search-row">
+                        <div class="search-box-wrapper">
+                            <i data-lucide="search"></i>
+                            <input type="text" id="alumni-search" placeholder="Search by name, company, role, or skills..." autocomplete="off">
+                        </div>
+                        
+                        <div class="filter-dropdown-wrapper">
+                            <select id="alumni-branch-filter" class="filter-dropdown">
+                                <option value="all">All Branches</option>
+                                <option value="CSE">CSE</option>
+                                <option value="IT">IT</option>
+                                <option value="MCA">MCA</option>
+                                <option value="ECE">ECE</option>
+                                <option value="EE">EE</option>
+                                <option value="ME">ME</option>
+                                <option value="CHE">CHE</option>
+                                <option value="CE">CE</option>
+                                <option value="IE">IE</option>
+                                <option value="OT">Others</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="location-filters-row">
+                        <span class="loc-filter-label">Quick Locations:</span>
+                        <div class="location-pills">
+                            <button class="location-pill active" data-location="all">All</button>
+                            <button class="location-pill" data-location="Bangalore">Bangalore</button>
+                            <button class="location-pill" data-location="Delhi">Delhi NCR</button>
+                            <button class="location-pill" data-location="Hyderabad">Hyderabad</button>
+                            <button class="location-pill" data-location="Remote">Remote</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alumni Grid Directory -->
+                <section class="alumni-grid-section">
+                    <div class="alumni-grid" id="alumni-grid">
+                        <!-- Dynamic profiles will be loaded here via app.js -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB 2: Nearby Map View Content -->
+            <div id="map-view-content" class="tab-content">
+                <!-- Distance Controls Card -->
+                <div class="map-controls-card">
+                    <div class="radius-control-group">
+                        <label for="radius-slider">Proximity Radius: <span id="radius-value">15</span> km</label>
+                        <input type="range" id="radius-slider" min="5" max="100" step="5" value="15">
+                    </div>
+                    <div class="center-location-info">
+                        <i data-lucide="map-pin"></i>
+                        <span>Center Location: <strong>HBTU East Campus, Kanpur</strong></span>
+                    </div>
+                </div>
+
+                <!-- Split Map Proximity Layout -->
+                <div class="nearby-split-layout">
+                    <!-- Map Canvas Container -->
+                    <div class="mock-map-canvas-container">
+                        <div class="mock-map-canvas" id="nearby-map-canvas">
+                            <div class="map-grid-overlay"></div>
+                            
+                            <!-- User Position Center Marker -->
+                            <div class="user-position-marker">
+                                <div class="pulse-ring"></div>
+                                <div class="marker-dot">
+                                    <i data-lucide="navigation"></i>
+                                </div>
+                                <span class="marker-label">You (HBTU Campus)</span>
+                            </div>
+                            
+                            <!-- Alumni pins will render dynamically here -->
+                        </div>
+                    </div>
+
+                    <!-- Proximity list sidebar -->
+                    <div class="nearby-sidebar">
+                        <h3>Alumni Proximity List</h3>
+                        <p class="sidebar-meta">Verified alumni currently within radius</p>
+                        <div class="nearby-list" id="nearby-list">
+                            <!-- Proximity cards dynamically rendered by app.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to action block -->
+            <section class="directory-join-banner">
+                <div class="join-banner-content">
+                    <div class="banner-badge">
+                        <i data-lucide="shield-check"></i>
+                        <span>Secure & Verified</span>
+                    </div>
+                    <h2>Are you a Harcourtian Alumnus?</h2>
+                    <p>Verify your credentials on the Harcourtian Connect app to access the complete interactive directory, send messages directly to peers, and build your profile in the alumni network.</p>
+                    <div class="banner-ctas">
+                        <a href="https://play.google.com/store/apps/details?id=com.kwh.almuniconnect" class="btn btn-primary">
+                            <i data-lucide="download"></i>
+                            <span>Get App & Register</span>
+                        </a>
+                        <a href="verification-guidelines.html" class="btn btn-secondary text-white">
+                            <i data-lucide="info"></i>
+                            <span>Verification Guidelines</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Details View Modal -->
+    <div class="alumni-modal" id="alumni-profile-modal">
+        <div class="alumni-modal-content">
+            <!-- Dynamic profile details will render here -->
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo-container">
+                    <div class="logo-crest text-white">
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title text-white">Harcourtian</span>
+                        <span class="logo-sub text-blue-light">Connect</span>
+                    </div>
+                </div>
+                <p class="footer-tagline">Building a stronger, more connected Harcourtian family worldwide.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-link-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="alumni.html">Alumni Directory</a></li>
+                        <li><a href="jobs.html">Jobs Portal</a></li>
+                        <li><a href="businesses.html">Business Directory</a></li>
+                        <li>
+                           <a href="https://play.google.com/store/apps/details?id=com.kwh.almuniconnect" class="btn btn-primary btn-nav" id="btn-nav-download">
+                                <i data-lucide="download"></i>
+                                <span>Download App</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-link-col">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-link-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Use</a></li>
+                        <li><a href="verification-guidelines.html">Verification Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p>&copy; 2026 Harcourtian Connect. All rights reserved. Designed for Harcourtian Alumni.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@0.400.0/dist/umd/lucide.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -256,16 +256,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="showcase-screen-content">
                     <div class="job-list-card">
-                        <div class="job-badge">Referral Available</div>
-                        <div class="job-role">Senior React Developer</div>
-                        <div class="job-company">Google Inc.</div>
-                        <div class="job-posted">Posted by Amit (MCA '10)</div>
-                    </div>
-                    <div class="job-list-card" style="margin-top: 6px;">
-                        <div class="job-badge bg-green-light">Full Time</div>
-                        <div class="job-role">Data Analyst</div>
-                        <div class="job-company">Microsoft</div>
-                        <div class="job-posted">Posted by Rohan (IT '15)</div>
+                        <div class="job-badge">Full Time</div>
+                        <div class="job-role">Backend Engineer (Java)</div>
+                        <div class="job-company">Sanmit Technologies</div>
+                        <div class="job-posted">Posted by Radhika (CSE '20)</div>
                     </div>
                 </div>
             `,
@@ -845,64 +839,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventsGrid = document.getElementById('events-grid');
     if (eventsGrid) {
         // Initial list of events
-        let events = [
-            {
-                id: 1,
-                title: 'MCA Connect 2026 Alumni Meet',
-                category: 'reunion',
-                host: 'Amit Gupta',
-                branch: 'MCA',
-                batch: '2010',
-                dateTime: '2026-02-22T10:00',
-                location: 'HBTU Campus, Kanpur, UP',
-                email: 'amit.gupta.10@alumni.hbtu.ac.in',
-                desc: 'A grand gathering for the MCA 2010 batch to celebrate their journey, reconnect with batchmates, share career milestones, and relive the gold old campus memories. Lunch and campus tour included.',
-                regLink: 'https://forms.gle/mca2026reunion',
-                rsvps: 45
-            },
-            {
-                id: 2,
-                title: 'Bangalore Chapter Networking Meet',
-                category: 'chapter_meet',
-                host: 'Sanjeev Batra',
-                branch: 'MCA',
-                batch: '2001',
-                dateTime: '2026-03-15T18:00',
-                location: 'The Oberoi, MG Road, Bengaluru',
-                email: 'sanjeev.batra@sanmittechnologies.com',
-                desc: 'Join the Bengaluru chapter of Harcourtian Connect for an evening of networking, dinner, and professional discussions. Perfect opportunity to meet senior leaders and young startups in the region.',
-                regLink: '',
-                rsvps: 28
-            },
-            {
-                id: 3,
-                title: 'AI Product Growth & Content Strategy',
-                category: 'webinar',
-                host: 'Akhil Khare',
-                branch: 'CSE',
-                batch: '1994',
-                dateTime: '2026-04-05T15:00',
-                location: 'Google Meet (Virtual)',
-                email: 'akhil.khare.94@alumni.hbtu.ac.in',
-                desc: 'A masterclass on using AI content models and Search/Answer Engine Optimization for scaling startups. Akhil will showcase live demos of modern growth stacks.',
-                regLink: 'https://meet.google.com/hbtu-alumni-tech',
-                rsvps: 82
-            },
-            {
-                id: 4,
-                title: 'Harcourt Alumni Professional Golf Cup',
-                category: 'networking',
-                host: 'Mamata Swaroop',
-                branch: 'MCA',
-                batch: '1994',
-                dateTime: '2026-04-18T08:00',
-                location: 'Noida Golf Course, Sector 38, Noida',
-                email: 'mamata.swaroop.94@alumni.hbtu.ac.in',
-                desc: 'An exclusive networking event over a friendly golf tournament, followed by a networking high-tea. Open to all alumni and spouses.',
-                regLink: '',
-                rsvps: 18
-            }
-        ];
+        let events = [];
 
         let activeEventCategory = 'all';
         let eventSearchQuery = '';
@@ -937,8 +874,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventsGrid.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-light);">
                         <i data-lucide="calendar-off" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;"></i>
-                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No Events Found</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keywords or category filters.</p>
+                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No UpComming events found</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Be the first to host an event and connect with fellow Harcourtians!</p>
                     </div>
                 `;
                 lucide.createIcons();
@@ -949,7 +886,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const dateObj = new Date(evt.dateTime);
                 const day = !isNaN(dateObj.getTime()) ? dateObj.getDate() : '??';
                 const month = !isNaN(dateObj.getTime()) ? dateObj.toLocaleString('en-US', { month: 'short' }).toUpperCase() : 'EVT';
-                
+
                 // Assign gradient classes based on category
                 let gradClass = 'event-grad-blue';
                 if (evt.category === 'reunion') gradClass = 'event-grad-orange';
@@ -1218,60 +1155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const blogGrid = document.getElementById('blog-grid');
     if (blogGrid) {
         // Initial list of blog posts
-        let blogPosts = [
-            {
-                id: 1,
-                title: 'HBTU MCA Placement Prep Guide: Cracking Top Tech Roles',
-                category: 'placement',
-                author: 'Amit Gupta',
-                branch: 'MCA',
-                batch: '2010',
-                date: '2026-01-12',
-                readTime: 5,
-                email: 'amit.gupta.10@alumni.hbtu.ac.in',
-                summary: 'Proven strategies, coding preparation methods, and resume-building tips that helped our MCA batch secure offers from top-tier companies.',
-                content: `Preparing for campus placements can feel overwhelming, but a structured approach can make all the difference. In this guide, I share the blueprint that helped our MCA batch land roles at premium companies.\n\nFirst, focus heavily on Data Structures and Algorithms (DSA). Solve at least 150-200 curated problems covering arrays, strings, trees, and dynamic programming. Sites like LeetCode and GeeksforGeeks are invaluable resources.\n\nSecond, strengthen your core computer science fundamentals. Interviewers frequently grill candidates on Object-Oriented Programming (OOPs), Database Management Systems (DBMS), and Computer Networks. Make sure you can write clean SQL queries and explain database normalization.\n\nThird, your project portfolio matters. Instead of copy-pasting generic projects, build one unique, end-to-end working application that solves a real problem. Be ready to explain the architecture, design choices, and challenges you overcame. Best of luck!`
-            },
-            {
-                id: 2,
-                title: 'Scaling a Startup: From HBTU Hostel Room to $5M ARR',
-                category: 'story',
-                author: 'Akhil Khare',
-                branch: 'CSE',
-                batch: '1994',
-                date: '2026-01-05',
-                readTime: 8,
-                email: 'akhil.khare.94@alumni.hbtu.ac.in',
-                summary: 'The startup journey of building Dylit.info, highlighting key lessons on finding product-market fit, fundraising, and growing AI-driven tools.',
-                content: `It all started back in my hostel room at HBTI, where late-night coding sessions sparked my interest in entrepreneurship. Years later, that foundation helped me build and scale Dylit.info to over $5M in Annual Recurring Revenue (ARR).\n\nFinding product-market fit is the hardest hurdle. In the early days, we built what we thought users wanted, only to be met with silence. It was only when we started actively listening to content creators and automating their tedious SEO loops that things took off. Iterate fast, fail cheaply, and double down on what works.\n\nAnother critical lesson is building a core team that shares your vision. Skills can be taught, but attitude and resilience cannot. For young graduates looking to start up, my advice is: do not wait for the perfect idea. Start building, launch early, and let your customers guide the roadmap.`
-            },
-            {
-                id: 3,
-                title: 'Centennial Infrastructure: HBTU Campus Transformation walkthrough',
-                category: 'news',
-                author: 'Sanjeev Batra',
-                branch: 'MCA',
-                batch: '2001',
-                date: '2025-12-20',
-                readTime: 4,
-                email: 'sanjeev.batra@sanmittechnologies.com',
-                summary: 'A walkthrough of HBTU\'s newly constructed academic blocks, digital labs, and state-of-the-art startup incubation centers.',
-                content: `I recently visited our alma mater, HBTU (formerly HBTI), Kanpur, and was blown away by the infrastructure changes that have taken place. The campus has truly transformed into a modern educational hub while preserving its historical charm.\n\nThe new academic blocks boast fully air-conditioned smart classrooms and digital seminar halls. Furthermore, the laboratory infrastructure has received massive upgrades, specifically in the CSE and Chemical departments, now equipped with high-performance computing clusters.\n\nWhat excited me the most was the new Startup Incubation Center (HBTI-INC). It provides coworking spaces, mentorship circles, and initial seed funding pathways for student entrepreneurs. Seeing students brainstorm active prototypes was inspiring. The spirit of innovation is alive and thriving at Harcourt!`
-            },
-            {
-                id: 4,
-                title: 'Navigating the 2026 Tech Market: Survival Tips for Graduates',
-                category: 'insights',
-                author: 'Vipin Singh',
-                branch: 'CSE',
-                batch: '2009',
-                date: '2025-11-15',
-                readTime: 6,
-                email: 'vipin.singh@alumni.hbtu.ac.in',
-                summary: 'An analysis of the current AI-dominated software market and how graduates can adapt their skillsets to remain competitive.',
-                content: `The software industry is undergoing a massive shift. In 2026, AI is no longer a luxury feature; it is embedded in every developer's workflow. To thrive, junior developers need to transition from code writers to systems thinkers.\n\nFirst, master AI-assisted development tools (like Copilot and Cursor). Knowing how to write precise prompts, debug AI code, and verify system reliability is now a core developer skill.\n\nSecond, build system design knowledge early. While AI can write standard functions, designing robust, scalable architectures, choosing the right databases, and optimizing performance requires human judgment. Focus on learning API design, caching layers, and cloud infrastructure.\n\nLastly, build soft skills. Emotional intelligence, clear written communication, and cross-functional collaboration are traits AI cannot replicate. Learn to explain technical ideas to non-technical business partners.`
-            }
-        ];
+        let blogPosts = [];
 
         let activeBlogCategory = 'all';
         let blogSearchQuery = '';
@@ -1306,8 +1190,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 blogGrid.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-light);">
                         <i data-lucide="book-open-check" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;"></i>
-                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No Articles Found</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keywords or category filters.</p>
+                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No blog here</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Be the first to share your story or experience with the community by filling out the form below!</p>
                     </div>
                 `;
                 lucide.createIcons();
@@ -1548,67 +1432,60 @@ document.addEventListener('DOMContentLoaded', () => {
         let jobs = [
             {
                 id: 1,
-                title: 'Senior React Developer',
-                company: 'Google Inc.',
+                title: 'Backend Engineer (Java)',
+                company: 'Sanmit Technologies',
                 category: 'fulltime',
-                location: 'Bangalore (Hybrid)',
-                referrer: 'Amit Gupta',
-                branch: 'MCA',
-                batch: '2010',
-                experience: '5+ years',
-                salary: '₹30 - ₹45 LPA',
-                skills: ['React', 'Redux', 'JavaScript', 'TypeScript', 'Webpack'],
-                referral: 'yes',
-                email: 'amit.gupta.10@alumni.hbtu.ac.in',
-                desc: 'We are looking for a Senior React Developer to join our core search infrastructure team in Bangalore. You will build highly responsive, localized front-end features, guide junior developers, and coordinate with product leads. Internal referrals are available for verified Harcourtian alumni.'
-            },
-            {
-                id: 2,
-                title: 'Data Analyst',
-                company: 'Microsoft',
-                category: 'remote',
-                location: 'Remote (India)',
-                referrer: 'Rohan Sharma',
-                branch: 'IT',
-                batch: '2015',
-                experience: '2-4 years',
-                salary: '₹18 - ₹25 LPA',
-                skills: ['SQL', 'Python', 'PowerBI', 'Excel', 'Data Warehousing'],
-                referral: 'yes',
-                email: 'rohan.sharma.15@alumni.hbtu.ac.in',
-                desc: 'Collaborate with global business units to extract patterns, generate reports, and design clean dashboard metrics. Strong command over SQL querying, data cleaning processes, and visualization frameworks is a must.'
-            },
-            {
-                id: 3,
-                title: 'Machine Learning Intern',
-                company: 'TechSolutions Ltd',
-                category: 'internship',
-                location: 'Noida, UP',
-                referrer: 'Vipin Singh',
+                location: 'Noida, Sector 62 (In-Office)',
+                referrer: 'Radhika Mathur',
                 branch: 'CSE',
-                batch: '2009',
-                experience: 'Freshers / Students',
-                salary: '₹30,000 / month',
-                skills: ['Python', 'PyTorch', 'TensorFlow', 'ML Ops', 'SQL'],
-                referral: 'yes',
-                email: 'vipin.singh.09@alumni.hbtu.ac.in',
-                desc: 'An exciting internship opportunity in our AI research division. You will work alongside senior architects to clean raw training datasets, train classification models, and write reliable backend API wrappers.'
-            },
-            {
-                id: 4,
-                title: 'Principal Product Manager',
-                company: 'Amazon',
-                category: 'fulltime',
-                location: 'Hyderabad, India',
-                referrer: 'Aminesh Shukla',
-                branch: 'IT',
-                batch: '2011',
-                experience: '8+ years',
+                batch: '2020',
+                experience: '1–4 Years',
                 salary: 'Competitive',
-                skills: ['Product Strategy', 'Roadmap', 'Analytics', 'Agile', 'Scale'],
+                skills: ['Java', 'Spring Boot', 'REST API', 'PostgreSQL', 'Microservices', 'Kafka', 'Docker', 'SQL', 'Git', 'DSA'],
                 referral: 'no',
-                email: 'aminesh.shukla.11@alumni.hbtu.ac.in',
-                desc: 'Lead the roadmap definition and feature launching for Amazon\'s logistics and shipment networks. Coordinate cross-functionally with engineering, UX, and operations teams to optimize global delivery routes.'
+                email: 'radhika.mathur@sanmittechnologies.com',
+                desc: `🚀 Job Opportunity | Backend Engineer (Java) | Noida (Sector 62)
+
+Dear Alumni,
+
+A great opportunity for professionals looking to grow their career in Java Backend Development.
+
+📍 Position: Backend Engineer (Java)
+🏢 Company: Sanmit Technologies
+📍 Location: Noida, Sector 62 (In-Office)
+💼 Experience: 1–4 Years
+
+Mandatory Skills
+✅ Core Java (Collections, Streams, OOP)
+✅ Spring Boot
+✅ REST API Development
+✅ SQL & PostgreSQL
+✅ Git
+✅ Data Structures & Algorithms (DSA)
+✅ Debugging & Problem Solving
+
+Preferred Skills
+- Microservices
+- Apache Kafka
+- Redis
+- Elasticsearch
+- Docker
+- CI/CD
+- OAuth2 / JWT / Keycloak
+- Kubernetes Basics
+
+Role Highlights
+- Build scalable backend services using Java & Spring Boot
+- Design and maintain REST APIs
+- Work with PostgreSQL databases
+- Participate in event-driven development using Kafka
+- Write unit and integration tests
+
+🎯 Ideal Candidate: 1–4 years of backend development experience with a strong learning mindset and good communication skills.
+
+📧 Apply by sending your CV to: radhika.mathur@sanmittechnologies.com
+
+If you're interested or know someone who fits this role, please share this opportunity within your network.`
             }
         ];
 
@@ -1795,7 +1672,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="job-description-block">
                     <h3>Role Description</h3>
-                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">${job.desc}</p>
+                    <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.6; margin-bottom:16px; white-space: pre-line;">${job.desc}</p>
                     
                     <h3 style="margin-top:20px;">Skills Required</h3>
                     <div class="job-skills-list" style="margin-bottom:20px;">
@@ -1994,136 +1871,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const alumniGrid = document.getElementById('alumni-grid');
     if (alumniGrid) {
         // Initial list of verified alumni
-        let alumniList = [
-            {
-                id: 1,
-                name: 'Amit Gupta',
-                branch: 'MCA',
-                batch: '2010',
-                role: 'Staff Software Engineer',
-                company: 'Google Inc.',
-                location: 'Bangalore, India',
-                skills: ['React', 'TypeScript', 'Node.js', 'System Design'],
-                bio: 'Amit has over 15 years of industry experience. He has previously worked at Yahoo and Directi. Amit specializes in building scalable frontend frameworks and microservices, and enjoys mentoring junior MCA students.',
-                email: 'amit.gupta.10@alumni.hbtu.ac.in',
-                linkedin: 'https://linkedin.com/in/dummy-amit-gupta',
-                distance: 2.8,
-                mapX: 40,
-                mapY: 35
-            },
-            {
-                id: 2,
-                name: 'Rohan Sharma',
-                branch: 'IT',
-                batch: '2015',
-                role: 'Data Engineering Lead',
-                company: 'Microsoft',
-                location: 'Delhi NCR, India',
-                skills: ['SQL', 'Python', 'Apache Spark', 'ETL Pipelines'],
-                bio: 'Rohan leads data warehouse engineering tracks. He coordinates cloud pipelines that process petabytes of intelligence reports daily. Rohan is open to referrals and technical mentorship reviews.',
-                email: 'rohan.sharma.15@alumni.hbtu.ac.in',
-                linkedin: 'https://linkedin.com/in/dummy-rohan-sharma',
-                distance: 12.5,
-                mapX: 25,
-                mapY: 65
-            },
-            {
-                id: 3,
-                name: 'Vipin Singh',
-                branch: 'CSE',
-                batch: '2009',
-                role: 'Co-Founder & CTO',
-                company: 'AI Lab Ltd',
-                location: 'Noida (Remote)',
-                skills: ['Python', 'PyTorch', 'TensorFlow', 'ML Ops'],
-                bio: 'Vipin was one of the early incubatees of the HBTU East Campus incubation cell. He co-founded AI Lab to build specialized neural models for retail workflows. He frequently recruits HBTU interns.',
-                email: 'vipin.singh.09@alumni.hbtu.ac.in',
-                linkedin: 'https://linkedin.com/in/dummy-vipin-singh',
-                distance: 8.2,
-                mapX: 70,
-                mapY: 20
-            },
-            {
-                id: 4,
-                name: 'Aminesh Shukla',
-                branch: 'IT',
-                batch: '2011',
-                role: 'Senior Product Manager',
-                company: 'Amazon',
-                location: 'Hyderabad, India',
-                skills: ['Product Strategy', 'Roadmaps', 'SQL', 'Agile Scale'],
-                bio: 'Aminesh coordinates shipping operations pipelines for logistics modules. He handles roadmap definitions, growth metrics, and cross-functional engineering deliverables.',
-                email: 'aminesh.shukla.11@alumni.hbtu.ac.in',
-                linkedin: 'https://linkedin.com/in/dummy-aminesh-shukla',
-                distance: 45.0,
-                mapX: 80,
-                mapY: 80
-            },
-            {
-                id: 5,
-                name: 'Nidhi Pathak',
-                branch: 'ECE',
-                batch: '2018',
-                role: 'Silicon Validation Engineer',
-                company: 'Intel Corporation',
-                location: 'Bangalore, India',
-                skills: ['VLSI', 'Verilog', 'FPGA Prototyping', 'C++'],
-                bio: 'Nidhi validation architect for core silicon processors. She specializes in post-silicon validation, debugging, and Verilog simulation frameworks. Happy to support girls in STEM.',
-                email: 'nidhi.pathak.18@alumni.hbtu.ac.in',
-                linkedin: 'https://linkedin.com/in/dummy-nidhi-pathak',
-                distance: 72.1,
-                mapX: 15,
-                mapY: 15
-            },
-            {
-                id: 6,
-                name: 'Vipul Aggarwal',
-                branch: 'CHE',
-                batch: '2013',
-                role: 'Refinery Operations Manager',
-                company: 'Reliance Industries',
-                location: 'Jamnagar, Gujarat (Remote)',
-                skills: ['Chemical Engineering', 'Plant Safety', 'Logistics'],
-                bio: 'Vipul manages refinery expansions and operations safety tracks. Proud chemical Harcourtian interested in clean energy conversion projects.',
-                email: 'vipul.aggarwal.13@alumni.hbtu.ac.in',
-                linkedin: 'https://linkedin.com/in/dummy-vipul-aggarwal',
-                distance: 120.0,
-                mapX: 90,
-                mapY: 10
-            },
-            {
-                id: 7,
-                name: 'Prakash Mishra',
-                branch: 'CSE',
-                batch: '2021',
-                role: 'Software Engineer',
-                company: 'HCL Technologies',
-                location: 'Kanpur, India',
-                skills: ['Java', 'Spring Boot', 'SQL', 'Git'],
-                bio: 'Prakash builds enterprise banking backends. He is local to Kanpur and frequently visits HBTU campus for networking meetups.',
-                email: 'prakash.mishra.21@alumni.hbtu.ac.in',
-                linkedin: 'https://linkedin.com/in/dummy-prakash-mishra',
-                distance: 1.2,
-                mapX: 45,
-                mapY: 55
-            },
-            {
-                id: 8,
-                name: 'Kirti Sen',
-                branch: 'IT',
-                batch: '2022',
-                role: 'System Engineer',
-                company: 'Tata Consultancy Services',
-                location: 'Kanpur, India',
-                skills: ['Python', 'Django', 'React', 'Docker'],
-                bio: 'Kirti works on building secure cloud dashboards. She loves connecting with recent graduates to help with placement interviews.',
-                email: 'kirti.sen.22@alumni.hbtu.ac.in',
-                linkedin: 'https://linkedin.com/in/dummy-kirti-sen',
-                distance: 4.5,
-                mapX: 60,
-                mapY: 50
-            }
-        ];
+        let alumniList = [];
 
         let activeBranchFilter = 'all';
         let activeLocationFilter = 'all';
@@ -2171,8 +1919,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 alumniGrid.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 40px; border: 1px dashed var(--border-color); border-radius: var(--border-radius-md); background: var(--bg-light);">
                         <i data-lucide="users" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 12px;"></i>
-                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No Alumni Found</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem;">Try adjusting your keywords, branch selection, or quick locations.</p>
+                        <h4 style="color: var(--text-dark); margin-bottom: 6px;">No alumni here</h4>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Be the first to join the directory and connect with fellow Harcourtians!</p>
                     </div>
                 `;
                 lucide.createIcons();
@@ -2491,7 +2239,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>${alumnus.distance} km away</span>
                     </div>
                 `;
-                
+
                 // Clicking pin opens profile modal
                 pin.addEventListener('click', () => {
                     openAlumniProfileModal(alumnus.id);

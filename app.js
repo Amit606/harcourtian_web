@@ -483,8 +483,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 logoText: 'DB',
                 desc: 'A tech-driven corporate food aggregator providing customized food catering solutions, daily high-quality meal subscriptions, and digital food court management services.',
                 location: 'Noida Sector 78, Noida',
-                website: 'https://play.google.com/store/apps/details?id=com.dabbax.customer&hl=en_IN',
-                email: 'mamata.swaroop.94@alumni.hbtu.ac.in',
+                website: 'https://www.dabba-x.com/',
+                email: '',
                 phone: '08128899686',
                 linkedin: 'https://www.linkedin.com/in/mamtaswaroop/',
                 discount: '10% discount on corporate lunch bookings & catering orders'
@@ -2272,6 +2272,145 @@ If you're interested or know someone who fits this role, please share this oppor
 
         // Render on page load
         renderAlumni();
+    }
+
+    /* ==========================================
+       COMMUNITY GROWTH CHART CONTROLLER
+       ========================================== */
+    const chartCanvas = document.getElementById('growthChart');
+    if (chartCanvas) {
+        const metricData = {
+            alumni: {
+                title: 'Alumni Growth Timeline',
+                labels: ['Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026'],
+                data: [705, 718, 730, 742, 750],
+                label: 'Verified Alumni',
+                borderColor: '#0b3b8c',
+                backgroundColor: 'rgba(11, 59, 140, 0.8)'
+            },
+            jobs: {
+                title: 'Job Referrals Shared',
+                labels: ['Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026'],
+                data: [5, 6, 10, 12, 16],
+                label: 'Job Opportunities',
+                borderColor: '#2e7d32',
+                backgroundColor: 'rgba(46, 125, 50, 0.8)'
+            },
+            companies: {
+                title: 'Partner Companies & Startups',
+                labels: ['Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026'],
+                data: [2, 3, 5, 7, 15],
+                label: 'Companies',
+                borderColor: '#ef6c00',
+                backgroundColor: 'rgba(239, 108, 0, 0.8)'
+            },
+            placements: {
+                title: 'Students Placed via Referrals',
+                labels: ['Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026'],
+                data: [13, 14, 15, 16, 17],
+                label: 'Students Placed',
+                borderColor: '#4f46e5',
+                backgroundColor: 'rgba(79, 70, 229, 0.8)'
+            },
+            events: {
+                title: 'Alumni Events & Meets Organized',
+                labels: ['Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026'],
+                data: [6, 7, 7, 8, 9],
+                label: 'Events Held',
+                borderColor: '#d32f2f',
+                backgroundColor: 'rgba(211, 47, 47, 0.8)'
+            },
+            countries: {
+                title: 'Countries with Active Alumni',
+                labels: ['Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026'],
+                data: [5, 5, 5, 6, 6],
+                label: 'Countries Active',
+                borderColor: '#f9a825',
+                backgroundColor: 'rgba(249, 168, 37, 0.8)'
+            }
+        };
+
+        let activeMetric = 'alumni';
+        const ctx = chartCanvas.getContext('2d');
+        let growthChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: metricData[activeMetric].labels,
+                datasets: [{
+                    label: metricData[activeMetric].label,
+                    data: metricData[activeMetric].data,
+                    borderColor: metricData[activeMetric].borderColor,
+                    backgroundColor: metricData[activeMetric].backgroundColor,
+                    borderWidth: 1.5,
+                    borderRadius: 6,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        padding: 12,
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { family: 'Outfit', size: 13 },
+                        bodyFont: { family: 'Inter', size: 12 },
+                        cornerRadius: 8
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 12 }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            font: { family: 'Inter', size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Interactive card click handlers
+        const cards = document.querySelectorAll('.metric-card');
+        const chartTitle = document.getElementById('chart-title');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove active class from all cards
+                cards.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked card
+                card.classList.add('active');
+
+                const metric = card.getAttribute('data-metric');
+                activeMetric = metric;
+
+                // Update Chart Title
+                chartTitle.textContent = metricData[metric].title;
+
+                // Update Chart Data & Styling
+                growthChart.data.labels = metricData[metric].labels;
+                growthChart.data.datasets[0].label = metricData[metric].label;
+                growthChart.data.datasets[0].data = metricData[metric].data;
+                growthChart.data.datasets[0].borderColor = metricData[metric].borderColor;
+                growthChart.data.datasets[0].backgroundColor = metricData[metric].backgroundColor;
+
+                growthChart.update();
+            });
+        });
     }
 });
 

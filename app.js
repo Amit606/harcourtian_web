@@ -2328,6 +2328,7 @@ If you're interested or know someone who fits this role, please share this oppor
                 borderColor: '#f9a825',
                 backgroundColor: 'rgba(249, 168, 37, 0.8)'
             }
+
         };
 
         let activeMetric = 'alumni';

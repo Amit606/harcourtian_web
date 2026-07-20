@@ -2754,6 +2754,18 @@ img {
     box-shadow: var(--shadow-sm);
 }
 
+.biz-logo-img {
+    width: auto;
+    max-width: 120px;
+    height: 60px;
+    border-radius: var(--border-radius-sm);
+    object-fit: contain;
+    background: #ffffff;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    padding: 6px 10px;
+}
+
 .biz-logo-blue { background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%); }
 .biz-logo-orange { background: linear-gradient(135deg, #f97316 0%, #c2410c 100%); }
 .biz-logo-purple { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%); }
@@ -2924,6 +2936,18 @@ img {
     width: 70px;
     height: 70px;
     font-size: 1.6rem;
+}
+
+.modal-header-biz .biz-logo-img {
+    width: auto;
+    max-width: 150px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: var(--border-radius-sm);
+    background: #ffffff;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
 }
 
 .modal-biz-title {

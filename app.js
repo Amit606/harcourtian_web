@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="biz-card-item">
                         <div class="biz-logo bg-blue-soft">DY</div>
                         <div class="biz-info">
-                            <div class="biz-name">Dylit.info</div>
+                            <div class="biz-name">DYLIT.info</div>
                             <div class="biz-owner">Owned by Akhil (CSE '94)</div>
                             <div class="biz-desc">AI Content Growth Platform</div>
                         </div>
@@ -456,14 +456,33 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initial list of businesses
         let businesses = [
             {
+                id: 11,
+                name: 'Wholviz Foods',
+                category: 'food',
+                owner: 'Arpana Rohatgi',
+                branch: 'Biochemical',
+                batch: '1999',
+                logoClass: 'biz-logo-green',
+                logoText: 'WF',
+                logoUrl: 'images/wholviz_logo.png',
+                desc: 'A health and nutritional products venture co-founded by HBTI alumna Arpana Rohatgi, offering high-quality protein powders, drink mixes, and wellness food solutions.',
+                location: 'Noida, Uttar Pradesh',
+                website: 'https://wholvizfoods.com/',
+                email: 'quality@wholvizfoods.com',
+                phone: '',
+                linkedin: 'https://www.linkedin.com/company/wholvizfoods/posts/?feedView=all',
+                discount: '10% discount for Harcourtian alumni using promo code ARP01'
+            },
+            {
                 id: 7,
-                name: 'Dylit.info',
+                name: 'DYLIT.info',
                 category: 'technology',
                 owner: 'Akhil Khare',
                 branch: 'CSE',
                 batch: '1994',
                 logoClass: 'biz-logo-cyan',
                 logoText: 'DY',
+                logoUrl: 'images/dylit_logo.png',
                 desc: 'An AI-powered content growth platform designed for creators, solopreneurs, and small businesses to simplify content creation, SEO/AEO optimization, and multi-channel promotion.',
                 location: 'Hyderabad, Telangana',
                 website: 'https://home.dylit.info/',
@@ -481,6 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 batch: '1994',
                 logoClass: 'biz-logo-orange',
                 logoText: 'DB',
+                logoUrl: 'images/dabbax_logo.png',
                 desc: 'A tech-driven corporate food aggregator providing customized food catering solutions, daily high-quality meal subscriptions, and digital food court management services.',
                 location: 'Noida Sector 78, Noida',
                 website: 'https://www.dabba-x.com/',
@@ -498,6 +518,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 batch: '2004',
                 logoClass: 'biz-logo-blue',
                 logoText: 'KR',
+                logoUrl: 'images/kloudrac_logo.png',
+                logoBg: '#0f172a',
                 desc: 'A Salesforce Summit (Platinum) Partner specializing in cloud consulting, custom application development, Salesforce implementations, and digital transformation services.',
                 location: 'Noida, Uttar Pradesh',
                 website: 'https://www.kloudrac.com/',
@@ -567,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.innerHTML = `
                     <div>
                         <div class="biz-card-header">
-                            <div class="biz-logo-placeholder ${biz.logoClass}">${biz.logoText}</div>
+                            ${biz.logoUrl ? `<img src="${biz.logoUrl}" alt="${biz.name} Logo" class="biz-logo-img" ${biz.logoBg ? `style="background: ${biz.logoBg}; border-color: ${biz.logoBg};"` : ''}>` : `<div class="biz-logo-placeholder ${biz.logoClass}">${biz.logoText}</div>`}
                             <div class="biz-meta">
                                 <h3 class="biz-card-title">${biz.name}</h3>
                                 <span class="biz-category-badge">${biz.category}</span>
@@ -637,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <i data-lucide="x" style="width: 24px; height: 24px;"></i>
                 </button>
                 <div class="modal-header-biz">
-                    <div class="biz-logo-placeholder ${biz.logoClass}">${biz.logoText}</div>
+                    ${biz.logoUrl ? `<img src="${biz.logoUrl}" alt="${biz.name} Logo" class="biz-logo-img" ${biz.logoBg ? `style="background: ${biz.logoBg}; border-color: ${biz.logoBg};"` : ''}>` : `<div class="biz-logo-placeholder ${biz.logoClass}">${biz.logoText}</div>`}
                     <div>
                         <h2 class="modal-biz-title">${biz.name}</h2>
                         <span class="biz-category-badge">${biz.category}</span>
